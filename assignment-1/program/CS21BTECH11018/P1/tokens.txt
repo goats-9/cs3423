@@ -1,0 +1,61 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+keyword: pp1:
+type: null
+punctuator: (
+punctuator: )
+keyword: pp2:
+punctuator: [
+keyword: pp3:
+type: integer_2
+integer: 1
+punctuator: ,
+integer: 2
+punctuator: ,
+integer: 1
+punctuator: ;
+keyword: pp2:
+type: character_1
+integer: 1
+punctuator: ,
+integer: 1
+punctuator: ,
+punctuator: ;
+keyword: pp3:
+type: string
+assignment operator: =
+float: e
+keyword: or
+id: \
+punctuator: ;
+keyword: pp4:
+integer: 1
+assignment operator: =
+integer: 2
+id: /1
+arithmetic operator: +
+id: _2
+punctuator: ;
+keyword: pp5:
+keyword: in case that
+integer: 1
+keyword: gt
+integer: 2
+keyword: and
+integer: 1
+keyword: gteq
+integer: 3
+keyword: pp6:
+keyword: do
+integer: 1
+assignment operator: =
+integer: 2
+punctuator: ;
+keyword: pp7:
+keyword: otherwise
+keyword: pp8:
+keyword: jump to
+integer: 4
+punctuator: ;
+keyword: pp9:
+punctuator: ]
