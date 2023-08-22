@@ -1,0 +1,19 @@
+pp1:  integer_2 /12foo (integer_2 /34)
+pp2:  [
+pp3:      return /34/(1+1);
+pp4:  ]
+pp5:
+pp6:  integer_2 +double (integer_2 *abcd1234)
+pp7:  [
+pp8:      in case that [*abcd1234 neq 0]
+pp9:      do [
+pp10:         return *abcd1234-1;
+pp11:     ] otherwise in case that [*abcd1234 lt 0]
+pp12:     do [
+pp13:         return *abcd1234;
+pp14:     ]
+pp15:     otherwise
+pp16:         jump to pp18;
+pp17:
+pp18:     return /12foo(*abcd1234);
+pp19: ]

@@ -1,0 +1,20 @@
+pp1:
+pp2:
+pp3:
+pp4:  integer_2 /get_Ascii (character_1 +x)
+pp5:  [
+pp6:      return (integer_2)(+x);
+pp7:  ]
+pp8:
+pp9:  integer_2 _inc (integer_2 *t)
+pp10: [
+pp11:     return *t+1;
+pp12: ]
+pp13:  
+pp14: null main ()
+pp15: [
+pp16:     character_1 ch = 'o';
+pp17:     integer_2 begin = /get_Ascii(_inc((integer_2)ch));
+pp18: ]
+pp19:
+pp20:
