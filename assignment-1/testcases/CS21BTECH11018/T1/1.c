@@ -1,4 +1,4 @@
-int /get_Ascii (char +x)
+int /get_Ascii(char +x)
 {
     return (int)(+x);
 }
@@ -11,5 +11,5 @@ int _inc (int *t)
 void main()
 {
     char ch = 'o';
-    int begin = /get_Ascii(_inc(int(ch)));
+    int begin = /get_Ascii(_inc((int)ch));
 }

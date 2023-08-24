@@ -1,0 +1,88 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+label: pp1
+punctuation: :
+label: pp2
+punctuation: :
+datatype: integer_2
+ID: /get_Ascii
+special symbol: (
+datatype: character_1
+ID: +x
+special symbol: )
+label: pp3
+punctuation: :
+special symbol: [
+label: pp4
+punctuation: :
+reserved keyword: return
+special symbol: (
+datatype: integer_2
+special symbol: )
+special symbol: (
+ID: +x
+special symbol: )
+punctuation: ;
+label: pp5
+special symbol: ]
+label: pp6
+punctuation: :
+label: pp7
+punctuation: :
+datatype: integer_2
+ID: _inc
+special symbol: (
+datatype: integer_2
+ID: *t
+special symbol: )
+label: pp8
+punctuation: :
+special symbol: [
+label: pp9
+punctuation: :
+reserved keyword: return
+ID: *t
+operator: +
+constant: 1
+punctuation: ;
+label: pp10
+punctuation: :
+special symbol: ]
+label: pp11
+punctuation: :
+label: pp12
+punctuation: :
+datatype: null
+ID: main
+special symbol: (
+special symbol: )
+label: pp13
+punctuation: :
+special symbol: [
+label: pp14
+punctuation: :
+datatype: character_1
+ID: ch
+operator: =
+punctuation: '
+constant: o
+punctuation: '
+punctuation: ;
+label: pp15
+punctuation: :
+datatype: integer_2
+ID: begin
+operator: =
+ID: /get_Ascii
+special symbol: (
+special symbol: (
+datatype: integer_2
+special symbol: )
+ID: ch
+special symbol: )
+punctuation: ;
+label: pp16
+punctuation: :
+label: pp17
+punctuation: :
+special symbol: ]

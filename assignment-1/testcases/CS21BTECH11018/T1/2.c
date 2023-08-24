@@ -5,17 +5,15 @@ int /12foo (int /e4)
 
 int +r00t (int *abcd1234)
 {
-    if ( *abcd1234 == 0)
+    if (*abcd1234 == 0)
     {
         return *abcd1234 - 1;
     } else if (*abcd1234 < 0)
     {
-        return *abcd1234;
+        return *abcd1324;
     }
     else
-    {
-        goto L1;
-    }
-
-L1: return /12foo(*abcd1234);
+    { goto pp18; }
+    int /a213, 2e2e, _asd;
+pp18: return /12foo(*abcd1234);
 }
