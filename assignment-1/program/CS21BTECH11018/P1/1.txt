@@ -1,0 +1,11 @@
+pp1: null foo ()
+pp2: [
+pp3: integer_2 x1, x2, 1x;
+pp4: character_1 c1, 1c, c;
+pp5: string s = "Hello World\n";
+pp6: x1 = x2 / 1x + x _ 2;
+pp7: in case that [x1 gt 2 and 1x gteq 3]
+pp8:    do [1x=2;]
+pp9: otherwise
+pp10:    [ jump to pp4; ]
+pp11: ]

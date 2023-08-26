@@ -1,0 +1,3 @@
+int main ( ) { 
+pp2 :goto pp2 ;
+} 

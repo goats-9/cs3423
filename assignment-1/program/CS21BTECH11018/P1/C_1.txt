@@ -1,0 +1,11 @@
+void foo ( ) 
+{ 
+int x1 ,x2 ,1x ;
+pp4 :char c1 ,1c ,c ;
+char * s = "Hello World\n";
+x1 = x2 / 1x + pow(x,1.0/2) ;
+if ( x1 > 2&& 1x >= 3) 
+ { 1x = 2;} 
+else 
+{ goto pp4;} 
+} 

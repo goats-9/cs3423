@@ -1,0 +1,15 @@
+pp1: null m432 (integer_2 argc, string ar9v)
+pp2: [
+pp3:    character_1 /2x;
+pp4:    integer_2 /33ze, _qwe, -3erx;
+pp5:    /2x = 'o';
+pp6:    string /sr = "Question\n";
+pp7:    in case that [[/2x neq 'o'] and [_qwe _ -3erx eq 12]] do
+pp8:    [
+pp9:        /33ze = /33ze / 33;
+pp10:   ]
+pp11:   otherwise [
+pp12:       /33ze = /33ze * 33; jump to pp14;
+pp13:   ]
+pp14:   return _qwe;
+pp15: ]

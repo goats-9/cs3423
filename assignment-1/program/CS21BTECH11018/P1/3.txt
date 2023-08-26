@@ -1,0 +1,3 @@
+pp1: integer_2 main() [
+pp2:  jump to pp2;
+pp3: ]
