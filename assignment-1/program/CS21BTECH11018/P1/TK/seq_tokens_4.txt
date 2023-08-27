@@ -1,0 +1,108 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+label: pp1
+punctuation: :
+datatype: null
+ID: m432
+special symbol: (
+datatype: integer_2
+ID: argc
+punctuation: ,
+datatype: string
+ID: ar9v
+special symbol: )
+label: pp2
+punctuation: :
+special symbol: [
+label: pp3
+punctuation: :
+datatype: character_1
+ID: /2x
+punctuation: ;
+label: pp4
+punctuation: :
+datatype: integer_2
+ID: /33ze
+punctuation: ,
+ID: _qwe
+punctuation: ,
+ID: -3erx
+punctuation: ;
+label: pp5
+punctuation: :
+ID: /2x
+operator: =
+punctuation: '
+constant: o
+punctuation: '
+punctuation: ;
+label: pp6
+punctuation: :
+datatype: string
+ID: /sr
+operator: =
+punctuation: "
+constant: Question\n
+punctuation: "
+punctuation: ;
+label: pp7
+punctuation: :
+reserved keyword: in case that
+special symbol: [
+special symbol: [
+ID: /2x
+reserved keyword: neq
+punctuation: '
+constant: o
+punctuation: '
+special symbol: ]
+reserved keyword: and
+special symbol: [
+ID: _qwe
+operator: _
+ID: -3erx
+reserved keyword: eq
+constant: 12
+special symbol: ]
+special symbol: ]
+reserved keyword: do
+label: pp8
+punctuation: :
+special symbol: [
+label: pp9
+punctuation: :
+ID: /33ze
+operator: =
+ID: /33ze
+operator: /
+constant: 33
+punctuation: ;
+label: pp10
+punctuation: :
+special symbol: ]
+label: pp11
+punctuation: :
+reserved keyword: otherwise
+special symbol: [
+label: pp12
+punctuation: :
+ID: /33ze
+operator: =
+ID: /33ze
+operator: *
+constant: 33
+punctuation: ;
+reserved keyword: jump to
+label: pp14
+punctuation: ;
+label: pp13
+punctuation: :
+special symbol: ]
+label: pp14
+punctuation: :
+reserved keyword: return
+ID: _qwe
+punctuation: ;
+label: pp15
+punctuation: :
+special symbol: ]

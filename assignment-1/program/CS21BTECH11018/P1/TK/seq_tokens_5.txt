@@ -1,0 +1,12 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+label: pp1
+punctuation: :
+special symbol: (
+constant: 2
+operator: +
+constant: 2
+special symbol: )
+operator: _
+constant: 2
+punctuation: ;

@@ -1,0 +1,15 @@
+void m432 ( int argc ,char * ar9v ) 
+{ 
+char /2x ;
+int /33ze ,_qwe ,-3erx ;
+/2x = 'o';
+char * /sr = "Question\n";
+if ( ( /2x != 'o') && ( pow(_qwe,1.0/-3erx) == 12) )  
+{ 
+/33ze = /33ze / 33;
+} 
+else { 
+/33ze = /33ze * 33;goto pp14 ;
+} 
+pp14 :return _qwe ;
+} 

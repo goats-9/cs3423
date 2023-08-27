@@ -304,11 +304,9 @@ void gen_C(node_t *start) {
                         // Reallocate memory for both pre and lexp
                         lt->c_lexeme = realloc(lt->c_lexeme, strlen(lt->c_lexeme) + strlen(lexp) + sizeof(char));
                         strcat(lt->c_lexeme, lexp);
-                        printf("%s\n", lt->c_lexeme);
                         lexp = realloc(lexp, strlen(lt->c_lexeme));
                         strcpy(lexp, lt->c_lexeme);
                         lexp[strlen(lexp)] = '\0';
-                        printf("%s\n", lexp);
                         prev = lt->prev;
                         deleteNode(lt);
                         lt = prev;
@@ -342,7 +340,6 @@ void gen_C(node_t *start) {
                         printf("Error in C code generation, no code generated.\n");
                         return;
                     }
-                    printf("%s %s %d\n", lexp, rexp, curr->next->type);
                     // Put left and right together
                     // 11 = 4 ("pow(") + 5 (",1.0/") + 2 (")\0")
                     curr->c_lexeme = realloc(curr->c_lexeme, strlen(lexp) + strlen(rexp) + 11*sizeof(char));
@@ -361,7 +358,6 @@ void gen_C(node_t *start) {
                         curr = prev;
                     }
                 } else if (!strcmp(curr->c_lexeme, "\n")) ++cline;
-                break;
             case LABEL:
             case ID:
             case KEYWORD:
@@ -379,6 +375,7 @@ void gen_C(node_t *start) {
     curr = start->next;
     while (curr->type != -1) {
         fprintf(cfile, "%s", curr->c_lexeme);
+        if (curr->type != PUNC && curr->type != CONST) fprintf(cfile, " ");
         curr = curr->next;
     }
 }

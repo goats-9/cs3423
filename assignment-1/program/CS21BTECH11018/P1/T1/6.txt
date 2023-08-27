@@ -1,0 +1,17 @@
+pp1   :
+pp2 :  integer_2 /get_Ascii (character_1 +x)
+pp3  :  [
+pp4   :      return (integer_2)(+x);
+pp5  :  ]
+pp6 :
+pp7 :  integer_2 _inc (integer_2 *t)
+pp8 : [
+pp9  :     return *t + 1   ;
+pp10 : ]
+pp11:  
+pp12: null        main (       )
+pp13 : [
+pp14  :     character_1 ch = 'o'  ;
+pp15 :     integer_2 begin = /get_Ascii(_inc((integer_2)ch));
+pp16: ]
+pp17:

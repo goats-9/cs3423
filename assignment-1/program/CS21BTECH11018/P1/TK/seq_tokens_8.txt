@@ -1,0 +1,32 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+label: pp1
+punctuation: :
+datatype: integer_2
+ID: D3CL
+special symbol: (
+datatype: integer_2
+ID: *x12
+special symbol: )
+label: pp2
+punctuation: :
+special symbol: [
+label: pp3
+punctuation: :
+datatype: integer_2
+ID: -a
+punctuation: ,
+ID: /a1
+punctuation: ,
+ID: +a2c
+punctuation: ;
+label: pp4
+punctuation: :
+datatype: character_1
+ID: +b
+punctuation: ,
+ID: *z
+punctuation: ,
+ID: -1g1iu3gh9813g91g3298g21913g389g1839g8g19tg
+punctuation: ;
+Error at line pp5

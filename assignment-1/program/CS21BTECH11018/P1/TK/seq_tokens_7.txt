@@ -1,0 +1,107 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+label: pp1
+punctuation: :
+datatype: integer_2
+ID: /12foo
+special symbol: (
+datatype: integer_2
+ID: /e4
+special symbol: )
+label: pp2
+punctuation: :
+special symbol: [
+label: pp3
+punctuation: :
+reserved keyword: return
+ID: /e4
+operator: _
+constant: 2
+punctuation: ;
+label: pp4
+punctuation: :
+special symbol: ]
+label: pp5
+punctuation: :
+label: pp6
+punctuation: :
+datatype: integer_2
+ID: +r00t
+special symbol: (
+datatype: integer_2
+ID: *abcd1234
+special symbol: )
+label: pp7
+punctuation: :
+special symbol: [
+label: pp8
+punctuation: :
+reserved keyword: in case that
+special symbol: [
+ID: *abcd1234
+reserved keyword: eq
+constant: 0
+special symbol: ]
+label: pp9
+punctuation: :
+reserved keyword: do
+special symbol: [
+label: pp10
+punctuation: :
+reserved keyword: return
+ID: *abcd1234
+operator: -
+constant: 1
+punctuation: ;
+label: pp11
+punctuation: :
+special symbol: ]
+reserved keyword: otherwise
+reserved keyword: in case that
+special symbol: [
+ID: *abcd1234
+reserved keyword: lt
+constant: 0
+special symbol: ]
+label: pp12
+punctuation: :
+reserved keyword: do
+special symbol: [
+label: pp13
+punctuation: :
+reserved keyword: return
+ID: *abcd1234
+punctuation: ;
+label: pp14
+punctuation: :
+special symbol: ]
+label: pp15
+punctuation: :
+reserved keyword: otherwise
+label: pp16
+punctuation: :
+special symbol: [
+reserved keyword: jump to
+label: pp18
+punctuation: ;
+special symbol: ]
+label: pp17
+punctuation: :
+datatype: integer_2
+ID: /a213
+punctuation: ,
+ID: 2e2e
+punctuation: ,
+ID: _asd
+punctuation: ;
+label: pp18
+punctuation: :
+reserved keyword: return
+ID: /12foo
+special symbol: (
+ID: *abcd1234
+special symbol: )
+punctuation: ;
+label: pp19
+punctuation: :
+special symbol: ]

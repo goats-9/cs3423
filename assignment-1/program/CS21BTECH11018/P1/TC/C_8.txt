@@ -1,0 +1,4 @@
+int D3CL ( int *x12 ) 
+{ 
+int -a ,/a1 ,+a2c ;
+char +b ,*z ,-1g1iu3gh9813g91g3298g21913g389g1839g8g19tg ;

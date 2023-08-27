@@ -1,0 +1,9 @@
+pp1    : integer_2 D3CL(integer_2 *x12)
+pp2  : [
+pp3:     integer_2 -a,/a1,+a2c;
+pp4 :     character_1 +b,*z,-1g1iu3gh9813g91g3298g21913g389g1839g8g19tg;
+pp-5:     in case that [*x12 and 1 eq 0] do [return 3;]
+pp6:     otherwise [return 2;]
+pp7: ]
+pp8  :
+pp9   : null M41N() [ integer_2 -2ez = 42069; integer_2 -1aml33t = D3CL(-2ez); -1aml33t = -1aml33t + -2ez; return null; ]

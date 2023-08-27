@@ -1,0 +1,15 @@
+
+int /get _Ascii ( char +x ) 
+{ 
+return ( int ) ( +x ) ;
+} 
+
+int _inc ( int *t ) 
+{ 
+return *t + 1;
+} 
+void main ( ) 
+{ 
+char ch = 'o';
+int begin = /get _Ascii ( _inc ( ( int ) ch ) ) ;
+} 
