@@ -112,13 +112,10 @@ basicstyle=\ttfamily,
 \bigskip
 
 This document provides a brief overview, implementation details and challenges
-in creating the given lexical analyzer (LA). The given LA lexes a program in an
+in creating the given lexical analyzer (LA), which lexes a program in an
 imaginary source language, writes the list of tokens encountered along with
 their type in one file, while also writing an almost equivalent C program in
 another file.
-
-The outputs on four public testcases, along with the testcases themselves, are
-also present in the given archive.
 
 \section{Building and Usage}
 
@@ -167,8 +164,8 @@ details related to implementation.
     \begin{enumerate}
         \item The operator \texttt{\_} is equivalent to \texttt{pow()} in C.
         Thus, we require both operands of this binary operator. This is quite
-        simple to handle with a doubly linked list, where we can refer to the
-        token before and after the operator.
+        simple to handle with a doubly linked list, where we can refer to tokens
+        before and after the operator.
         \item To generate C code appropriately, we require to check whether
         there is a \texttt{jump to} (equivalent to \texttt{goto} in C) precedes
         a label token. If so, then we need to add it to the program, otherwise
@@ -178,12 +175,12 @@ details related to implementation.
     require to make one prior pass to find which labels should be included in
     the C file. 
     
-    This has been worked around by using an integer array as a direct addressing
+    This has been implemented using an integer array as a direct addressing
     table, whose element at an index \texttt{i} is 1 if the label at line
     \texttt{i} has been referenced, and 0 otherwise.
     \item The square brackets have two meanings based on the context they are
-    used in the source language. To find out which context is implied, a boolean
-    flag variable \texttt{yycondfl} has been used.
+    used in the source language. A boolean flag variable \texttt{yycondfl} is
+    used to differentiate the use.
 \end{enumerate}
 
 \section{Implementation Issues}
