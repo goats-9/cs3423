@@ -67,6 +67,7 @@
     /* prototypes for linked list */
     node_t *newNode (char *, char *, int);
     void addNode (node_t *, node_t *);
+    void deleteNode (node_t *);
     void initLL (node_t **, node_t **);
     void destroyLL(node_t **);
     void printLL(node_t *);
@@ -258,7 +259,7 @@ void destroyLL(node_t **start) {
     node_t *curr = *start;
     while (curr) {
         next = curr->next;
-        // Free all pointers inside node
+        // Free pointers inside node
         free(curr->lexeme), free(curr->c_lexeme), free(curr);
         curr = next;
     }
@@ -270,52 +271,131 @@ void gen_C(node_t *start) {
     // Current line number to decide 
     // whether label must be inserted or not
     int cline = 1;
+    // First pass is for generating all C lexemes
+    // Especially for _ operator where we need to
+    // handle transformations such as (e1) _ (e2) 
+    // to pow((e1),1.0/(e2))
     while (curr) {
         switch (curr->type) {
-            case LABEL:
-                // Check if this is a goto label or not
-                if (curr->prev->type == KEYWORD && !strncmp(curr->prev->c_lexeme, "goto", 4)) fprintf(cfile, "%s", curr->c_lexeme);
-                else if (labelarr[cline]) fprintf(cfile, "%s ", curr->c_lexeme);
-                break;
-            case ID:
-                node_t *nxt = curr->next;
-                if (nxt->type == OP && !strncmp(nxt->lexeme, "_", 1)) {
-                    node_t *nxt2 = nxt->next;
-                    char *op1 = curr->c_lexeme;
-                    if (nxt2) {
-                        char *op2 = nxt2->c_lexeme;
-                        fprintf(cfile, "pow(%s,1.0/%s) ", op1, op2);
+            case OP:
+                // Handle _
+                if (!strcmp(curr->lexeme, "_")) {
+                    node_t *lt = curr->prev, *rt = curr->next;
+                    if (lt->type == -1 || rt->type == -1) {
+                        /* parse error */
+                        printf("Error in C code generation, no code generated.\n");
+                        return;
                     }
-                    curr = nxt2;
-                } else fprintf(cfile, "%s ", curr->c_lexeme);
+                    char *lexp = malloc(strlen(lt->c_lexeme)), *rexp = malloc(strlen(rt->c_lexeme));
+                    strcpy(lexp, lt->c_lexeme);
+                    strcpy(rexp, rt->c_lexeme);
+                    // Count the bracket imbalance on left side
+                    int brak = 0;
+                    if (lt->type == SPECIAL && !strcmp(lt->lexeme, ")")) brak = 1;
+                    node_t *prev = lt->prev;
+                    deleteNode(lt);
+                    lt = prev;
+                    // Consider the entire expression on left side
+                    while (brak && lt->type != -1) {
+                        if (lt->type == SPECIAL) {
+                            if (!strcmp(lt->lexeme, ")")) ++brak;
+                            else if (!strcmp(lt->lexeme, "(")) --brak;
+                        }
+                        // Reallocate memory for both pre and lexp
+                        lt->c_lexeme = realloc(lt->c_lexeme, strlen(lt->c_lexeme) + strlen(lexp) + sizeof(char));
+                        strcat(lt->c_lexeme, lexp);
+                        printf("%s\n", lt->c_lexeme);
+                        lexp = realloc(lexp, strlen(lt->c_lexeme));
+                        strcpy(lexp, lt->c_lexeme);
+                        lexp[strlen(lexp)] = '\0';
+                        printf("%s\n", lexp);
+                        prev = lt->prev;
+                        deleteNode(lt);
+                        lt = prev;
+                    }
+                    if (brak) {
+                        /* parsing error */
+                        printf("Error in C code generation, no code generated.\n");
+                        return;
+                    }
+                    // Count the bracket imbalance on right side
+                    brak = 0;
+                    if (rt->type == SPECIAL && !strcmp(rt->lexeme, "(")) brak = 1;
+                    node_t *next = rt->next;
+                    deleteNode(rt);
+                    rt = next;
+                    // Consider the entire expression on right side
+                    while (brak && rt->type != -1) {
+                        if (rt->type == SPECIAL) {
+                            if (!strcmp(rt->lexeme, ")")) --brak;
+                            else if (!strcmp(rt->lexeme, "(")) ++brak;
+                        }
+                        // Reallocate memory
+                        rexp = realloc(rexp, strlen(rexp) + strlen(rt->c_lexeme) + sizeof(char));
+                        strcat(rexp, rt->c_lexeme);
+                        next = rt->next;
+                        deleteNode(rt);
+                        rt = next;
+                    }
+                    if (brak) {
+                        /* parsing error */
+                        printf("Error in C code generation, no code generated.\n");
+                        return;
+                    }
+                    printf("%s %s %d\n", lexp, rexp, curr->next->type);
+                    // Put left and right together
+                    // 11 = 4 ("pow(") + 5 (",1.0/") + 2 (")\0")
+                    curr->c_lexeme = realloc(curr->c_lexeme, strlen(lexp) + strlen(rexp) + 11*sizeof(char));
+                    // Correctly format the C lexeme
+                    sprintf(curr->c_lexeme, "pow(%s,1.0/%s)", lexp, rexp);
+                }
                 break;
             // Fallthroughs!
+            case PUNC:
+                if (!strcmp(curr->c_lexeme, ":")) { 
+                    if (curr->prev->type == LABEL && labelarr[cline]);
+                    else {
+                        node_t *prev = curr->prev->prev;
+                        deleteNode(curr->prev);
+                        deleteNode(curr);
+                        curr = prev;
+                    }
+                } else if (!strcmp(curr->c_lexeme, "\n")) ++cline;
+                break;
+            case LABEL:
+            case ID:
             case KEYWORD:
             case DTYPE:
-            case OP:
             case SPECIAL:
-                fprintf(cfile, "%s ", curr->c_lexeme);
-                break;
-            case PUNC:
-                if (!strncmp(curr->c_lexeme, ":", 1)) { 
-                    if (curr->prev->type == LABEL && labelarr[cline]) fprintf(cfile, "%s", curr->c_lexeme);
-                } else fprintf(cfile, "%s", curr->c_lexeme);
-                if (!strncmp(curr->c_lexeme, "\n", 1)) ++cline;
-                break;
             case CONST:
-                fprintf(cfile, "%s", curr->c_lexeme);
             default:
                 break;
         }
+        // Move to next token
         curr = curr->next;
     }
+
+    // Second pass - simply print out the lexemes
+    curr = start->next;
+    while (curr->type != -1) {
+        fprintf(cfile, "%s", curr->c_lexeme);
+        curr = curr->next;
+    }
+}
+
+// function to delete a node in a doubly linked list
+void deleteNode(node_t *node) {
+    if (node->prev) node->prev->next = node->next;
+    if (node->next) node->next->prev = node->prev;
+    // free the node and its pointers
+    free(node->lexeme), free(node->c_lexeme), free(node);
 }
 
 // function to print the doubly linked list
 void printLL(node_t *start) { 
     node_t *curr = start;
     while (curr) { 
-        fprintf(stdout, "%d: %s\n", curr->type, curr->lexeme);
+        fprintf(stdout, "%d: %s\n", curr->type, curr->c_lexeme);
         curr = curr->next;
     }
 }
@@ -333,6 +413,9 @@ int main(int argc, char *argv[]) {
     }
     tfile = fopen(argv[2], "w");
     fprintf(tfile, PREAMBLE);
+    // initialize labelarr
+    labelarr = malloc(sizeof(int));
+    labelsz = 1;
     // initialize the doubly linked list
     initLL(&start, &end);
     // lex through the input filestream
@@ -340,7 +423,6 @@ int main(int argc, char *argv[]) {
     // generate C code
     cfile = fopen(argv[3], "w");
     gen_C(start);
-    // print the doubly linked list
     // destroy the doubly linked list
     destroyLL(&start);
     // close the files

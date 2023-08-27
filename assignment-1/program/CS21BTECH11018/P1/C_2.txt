@@ -1,3 +1,0 @@
-void foo ( ) 
-pp02 { 
-int x1 ,x2 ,1x ;

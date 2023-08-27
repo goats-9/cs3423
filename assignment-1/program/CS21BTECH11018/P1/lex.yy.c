@@ -593,15 +593,16 @@ char *yytext;
     /* prototypes for linked list */
     node_t *newNode (char *, char *, int);
     void addNode (node_t *, node_t *);
+    void deleteNode (node_t *);
     void initLL (node_t **, node_t **);
     void destroyLL(node_t **);
     void printLL(node_t *);
-#line 599 "lex.yy.c"
+#line 600 "lex.yy.c"
 #define YY_NO_INPUT 1
-#line 78 "lex.l"
+#line 79 "lex.l"
     /* regular definitions */
-#line 603 "lex.yy.c"
 #line 604 "lex.yy.c"
+#line 605 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -816,11 +817,11 @@ YY_DECL
 		}
 
 	{
-#line 90 "lex.l"
+#line 91 "lex.l"
 
 
 
-#line 94 "lex.l"
+#line 95 "lex.l"
     /* translation rules */
 
 
@@ -828,7 +829,7 @@ YY_DECL
     /* labels */
 
 
-#line 831 "lex.yy.c"
+#line 832 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -887,7 +888,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 101 "lex.l"
+#line 102 "lex.l"
 { 
                                                     // check if this is a goto label
                                                     if (end->prev->type == KEYWORD && !strncmp(end->prev->c_lexeme, "goto", 4)) {
@@ -907,67 +908,67 @@ YY_RULE_SETUP
 
 case 2:
 YY_RULE_SETUP
-#line 119 "lex.l"
+#line 120 "lex.l"
 { ACTION(KEYWORD, yytext, "if"); yycondfl = true; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 120 "lex.l"
+#line 121 "lex.l"
 { ACTION(KEYWORD, yytext, "else"); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 121 "lex.l"
+#line 122 "lex.l"
 { ACTION(KEYWORD, yytext, "goto"); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 122 "lex.l"
+#line 123 "lex.l"
 { ACTION(KEYWORD, yytext, ""); yycondfl = false; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 123 "lex.l"
+#line 124 "lex.l"
 { ACTION(KEYWORD, yytext, ">="); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 124 "lex.l"
+#line 125 "lex.l"
 { ACTION(KEYWORD, yytext, ">"); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 125 "lex.l"
+#line 126 "lex.l"
 { ACTION(KEYWORD, yytext, "<="); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 126 "lex.l"
+#line 127 "lex.l"
 { ACTION(KEYWORD, yytext, "<"); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 127 "lex.l"
+#line 128 "lex.l"
 { ACTION(KEYWORD, yytext, "=="); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 128 "lex.l"
+#line 129 "lex.l"
 { ACTION(KEYWORD, yytext, "!="); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 129 "lex.l"
+#line 130 "lex.l"
 { ACTION(KEYWORD, yytext, "&&"); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 130 "lex.l"
+#line 131 "lex.l"
 { ACTION(KEYWORD, yytext, "||"); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 131 "lex.l"
+#line 132 "lex.l"
 { ACTION(KEYWORD, yytext, yytext); }
 	YY_BREAK
 
@@ -975,74 +976,74 @@ YY_RULE_SETUP
 
 case 15:
 YY_RULE_SETUP
-#line 137 "lex.l"
+#line 138 "lex.l"
 { ACTION(DTYPE, yytext, "void"); } 
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 138 "lex.l"
+#line 139 "lex.l"
 { ACTION(DTYPE, yytext, "int"); } 
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 139 "lex.l"
+#line 140 "lex.l"
 { ACTION(DTYPE, yytext, "char"); } 
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 140 "lex.l"
+#line 141 "lex.l"
 { ACTION(DTYPE, yytext, "char *"); } 
 	YY_BREAK
 
     /* operators */
 
 case 19:
-#line 147 "lex.l"
-case 20:
 #line 148 "lex.l"
-case 21:
+case 20:
 #line 149 "lex.l"
-case 22:
+case 21:
 #line 150 "lex.l"
-case 23:
+case 22:
 #line 151 "lex.l"
-case 24:
+case 23:
 #line 152 "lex.l"
+case 24:
+#line 153 "lex.l"
 case 25:
 YY_RULE_SETUP
-#line 152 "lex.l"
+#line 153 "lex.l"
 { ACTION(OP, yytext, yytext); }
 	YY_BREAK
 
     /* punctuators */
 
 case 26:
-#line 159 "lex.l"
-case 27:
 #line 160 "lex.l"
+case 27:
+#line 161 "lex.l"
 case 28:
 YY_RULE_SETUP
-#line 160 "lex.l"
+#line 161 "lex.l"
 { ACTION(PUNC, yytext, yytext); }
 	YY_BREAK
 
     /* special symbols */
 
 case 29:
-#line 167 "lex.l"
+#line 168 "lex.l"
 case 30:
 YY_RULE_SETUP
-#line 167 "lex.l"
+#line 168 "lex.l"
 { ACTION(SPECIAL, yytext, yytext); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 168 "lex.l"
+#line 169 "lex.l"
 { if (yycondfl) { ACTION(SPECIAL, yytext, "("); } else { ACTION(SPECIAL, yytext, "{"); } }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 169 "lex.l"
+#line 170 "lex.l"
 { if (yycondfl) { ACTION(SPECIAL, yytext, ")"); } else { ACTION(SPECIAL, yytext, "}"); } }
 	YY_BREAK
 
@@ -1058,19 +1059,19 @@ YY_RULE_SETUP
 
 case 33:
 YY_RULE_SETUP
-#line 183 "lex.l"
+#line 184 "lex.l"
 { ACTION(CONST, yytext, yytext); }
 	YY_BREAK
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
-#line 184 "lex.l"
+#line 185 "lex.l"
 { ACTION(PUNC, "'", "'"); yytext[yyleng - 1] = '\0'; ++yytext; ACTION(CONST, yytext, yytext); ACTION(PUNC, "'", "'"); }
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 185 "lex.l"
+#line 186 "lex.l"
 { ACTION(PUNC, "\"", "\""); yytext[yyleng - 1] = '\0'; ++yytext; ACTION(CONST, yytext, yytext); ACTION(PUNC, "\"", "\""); }
 	YY_BREAK
 
@@ -1078,7 +1079,7 @@ YY_RULE_SETUP
 
 case 36:
 YY_RULE_SETUP
-#line 191 "lex.l"
+#line 192 "lex.l"
 { 
                                                     // Error if equal to "pp"
                                                     if (!strcmp(yytext, "pp")) {
@@ -1097,7 +1098,7 @@ YY_RULE_SETUP
 case 37:
 /* rule 37 can match eol */
 YY_RULE_SETUP
-#line 207 "lex.l"
+#line 208 "lex.l"
 { 
                                                     ++yylineno; 
                                                     addNode(end, newNode(yytext, yytext, PUNC)); 
@@ -1110,20 +1111,20 @@ YY_RULE_SETUP
 case 38:
 /* rule 38 can match eol */
 YY_RULE_SETUP
-#line 215 "lex.l"
+#line 216 "lex.l"
 { }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 216 "lex.l"
+#line 217 "lex.l"
 { fprintf(tfile, "Error at line pp%d\n", yylineno); return 0; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 218 "lex.l"
+#line 219 "lex.l"
 ECHO;
 	YY_BREAK
-#line 1126 "lex.yy.c"
+#line 1127 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2091,7 +2092,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 218 "lex.l"
+#line 219 "lex.l"
 
 
 /* auxiliary functions */
@@ -2136,7 +2137,7 @@ void destroyLL(node_t **start) {
     node_t *curr = *start;
     while (curr) {
         next = curr->next;
-        // Free all pointers inside node
+        // Free pointers inside node
         free(curr->lexeme), free(curr->c_lexeme), free(curr);
         curr = next;
     }
@@ -2148,52 +2149,131 @@ void gen_C(node_t *start) {
     // Current line number to decide 
     // whether label must be inserted or not
     int cline = 1;
+    // First pass is for generating all C lexemes
+    // Especially for _ operator where we need to
+    // handle transformations such as (e1) _ (e2) 
+    // to pow((e1),1.0/(e2))
     while (curr) {
         switch (curr->type) {
-            case LABEL:
-                // Check if this is a goto label or not
-                if (curr->prev->type == KEYWORD && !strncmp(curr->prev->c_lexeme, "goto", 4)) fprintf(cfile, "%s", curr->c_lexeme);
-                else if (labelarr[cline]) fprintf(cfile, "%s ", curr->c_lexeme);
-                break;
-            case ID:
-                node_t *nxt = curr->next;
-                if (nxt->type == OP && !strncmp(nxt->lexeme, "_", 1)) {
-                    node_t *nxt2 = nxt->next;
-                    char *op1 = curr->c_lexeme;
-                    if (nxt2) {
-                        char *op2 = nxt2->c_lexeme;
-                        fprintf(cfile, "pow(%s,1.0/%s) ", op1, op2);
+            case OP:
+                // Handle _
+                if (!strcmp(curr->lexeme, "_")) {
+                    node_t *lt = curr->prev, *rt = curr->next;
+                    if (lt->type == -1 || rt->type == -1) {
+                        /* parse error */
+                        printf("Error in C code generation, no code generated.\n");
+                        return;
                     }
-                    curr = nxt2;
-                } else fprintf(cfile, "%s ", curr->c_lexeme);
+                    char *lexp = malloc(strlen(lt->c_lexeme)), *rexp = malloc(strlen(rt->c_lexeme));
+                    strcpy(lexp, lt->c_lexeme);
+                    strcpy(rexp, rt->c_lexeme);
+                    // Count the bracket imbalance on left side
+                    int brak = 0;
+                    if (lt->type == SPECIAL && !strcmp(lt->lexeme, ")")) brak = 1;
+                    node_t *prev = lt->prev;
+                    deleteNode(lt);
+                    lt = prev;
+                    // Consider the entire expression on left side
+                    while (brak && lt->type != -1) {
+                        if (lt->type == SPECIAL) {
+                            if (!strcmp(lt->lexeme, ")")) ++brak;
+                            else if (!strcmp(lt->lexeme, "(")) --brak;
+                        }
+                        // Reallocate memory for both pre and lexp
+                        lt->c_lexeme = realloc(lt->c_lexeme, strlen(lt->c_lexeme) + strlen(lexp) + sizeof(char));
+                        strcat(lt->c_lexeme, lexp);
+                        printf("%s\n", lt->c_lexeme);
+                        lexp = realloc(lexp, strlen(lt->c_lexeme));
+                        strcpy(lexp, lt->c_lexeme);
+                        lexp[strlen(lexp)] = '\0';
+                        printf("%s\n", lexp);
+                        prev = lt->prev;
+                        deleteNode(lt);
+                        lt = prev;
+                    }
+                    if (brak) {
+                        /* parsing error */
+                        printf("Error in C code generation, no code generated.\n");
+                        return;
+                    }
+                    // Count the bracket imbalance on right side
+                    brak = 0;
+                    if (rt->type == SPECIAL && !strcmp(rt->lexeme, "(")) brak = 1;
+                    node_t *next = rt->next;
+                    deleteNode(rt);
+                    rt = next;
+                    // Consider the entire expression on right side
+                    while (brak && rt->type != -1) {
+                        if (rt->type == SPECIAL) {
+                            if (!strcmp(rt->lexeme, ")")) --brak;
+                            else if (!strcmp(rt->lexeme, "(")) ++brak;
+                        }
+                        // Reallocate memory
+                        rexp = realloc(rexp, strlen(rexp) + strlen(rt->c_lexeme) + sizeof(char));
+                        strcat(rexp, rt->c_lexeme);
+                        next = rt->next;
+                        deleteNode(rt);
+                        rt = next;
+                    }
+                    if (brak) {
+                        /* parsing error */
+                        printf("Error in C code generation, no code generated.\n");
+                        return;
+                    }
+                    printf("%s %s %d\n", lexp, rexp, curr->next->type);
+                    // Put left and right together
+                    // 11 = 4 ("pow(") + 5 (",1.0/") + 2 (")\0")
+                    curr->c_lexeme = realloc(curr->c_lexeme, strlen(lexp) + strlen(rexp) + 11*sizeof(char));
+                    // Correctly format the C lexeme
+                    sprintf(curr->c_lexeme, "pow(%s,1.0/%s)", lexp, rexp);
+                }
                 break;
             // Fallthroughs!
+            case PUNC:
+                if (!strcmp(curr->c_lexeme, ":")) { 
+                    if (curr->prev->type == LABEL && labelarr[cline]);
+                    else {
+                        node_t *prev = curr->prev->prev;
+                        deleteNode(curr->prev);
+                        deleteNode(curr);
+                        curr = prev;
+                    }
+                } else if (!strcmp(curr->c_lexeme, "\n")) ++cline;
+                break;
+            case LABEL:
+            case ID:
             case KEYWORD:
             case DTYPE:
-            case OP:
             case SPECIAL:
-                fprintf(cfile, "%s ", curr->c_lexeme);
-                break;
-            case PUNC:
-                if (!strncmp(curr->c_lexeme, ":", 1)) { 
-                    if (curr->prev->type == LABEL && labelarr[cline]) fprintf(cfile, "%s", curr->c_lexeme);
-                } else fprintf(cfile, "%s", curr->c_lexeme);
-                if (!strncmp(curr->c_lexeme, "\n", 1)) ++cline;
-                break;
             case CONST:
-                fprintf(cfile, "%s", curr->c_lexeme);
             default:
                 break;
         }
+        // Move to next token
         curr = curr->next;
     }
+
+    // Second pass - simply print out the lexemes
+    curr = start->next;
+    while (curr->type != -1) {
+        fprintf(cfile, "%s", curr->c_lexeme);
+        curr = curr->next;
+    }
+}
+
+// function to delete a node in a doubly linked list
+void deleteNode(node_t *node) {
+    if (node->prev) node->prev->next = node->next;
+    if (node->next) node->next->prev = node->prev;
+    // free the node and its pointers
+    free(node->lexeme), free(node->c_lexeme), free(node);
 }
 
 // function to print the doubly linked list
 void printLL(node_t *start) { 
     node_t *curr = start;
     while (curr) { 
-        fprintf(stdout, "%d: %s\n", curr->type, curr->lexeme);
+        fprintf(stdout, "%d: %s\n", curr->type, curr->c_lexeme);
         curr = curr->next;
     }
 }
@@ -2211,6 +2291,9 @@ int main(int argc, char *argv[]) {
     }
     tfile = fopen(argv[2], "w");
     fprintf(tfile, PREAMBLE);
+    // initialize labelarr
+    labelarr = malloc(sizeof(int));
+    labelsz = 1;
     // initialize the doubly linked list
     initLL(&start, &end);
     // lex through the input filestream
@@ -2218,7 +2301,6 @@ int main(int argc, char *argv[]) {
     // generate C code
     cfile = fopen(argv[3], "w");
     gen_C(start);
-    // print the doubly linked list
     // destroy the doubly linked list
     destroyLL(&start);
     // close the files
