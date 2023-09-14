@@ -5,9 +5,10 @@
     Date    : 2023-09-13
     File    : lex.l
     Purpose : Lex source code for C-like program language. Takes program source
-              code and:
-              1. Outputs a file containing a sequence of tokens along with their type.
-              2. Returns token type to parser
+              code and: 
+              1. Outputs a file containing a sequence of tokens along with their
+              type. 
+              2. Returns token type to parser.
     */
 %}
 
@@ -26,8 +27,13 @@
     #define KEYWORD             1
     #define PUNC                2
     #define DTYPE               3
-    #define CONST               4
+    #define STRING              4
+    #define CHAR                4
+    #define NUMBER              4
     #define OP                  5
+    #define UNARY_OP            5
+    #define BINARY_OP           5
+    #define REL_OP              5
     #define SPECIAL             6
     // macro for writing to token file
     #define TOKWRITE(tok, yytok) fprintf(tfile, "%s: %s\n", toknames[tok], yytok)
@@ -78,7 +84,6 @@ ws                                              {delim}+
 letter                                          [a-zA-Z]
 digit                                           [0-9]
 number                                          [+\-]?{digit}+
-posint                                          [1-9]{digit}*
 special                                         [@#\*\-\+/\\:_]
 char                                            (\\.|[^\\])
 
@@ -104,7 +109,7 @@ char                                            (\\.|[^\\])
 "loop"                                          |
 "return"                                        |
 "this"                                          |
-"while"                                         { TOKWRITE(KEYWORD, yytext); yylval.str = strdup(yytext); return KEYWORD; }
+"while"                                         { TOKWRITE(KEYWORD, yytext); yylval = strdup(yytext); return KEYWORD; }
 
 %{
     /* datatypes */
@@ -114,7 +119,7 @@ char                                            (\\.|[^\\])
 "char"                                          |
 "string"                                        |
 "bool"                                          |
-"void"                                          { TOKWRITE(DTYPE, yytext); yylval.str = strdup(yytext); return DTYPE; }
+"void"                                          { TOKWRITE(DTYPE, yytext); yylval = strdup(yytext); return DTYPE; }
 
 %{
     /* operators */
@@ -132,7 +137,7 @@ char                                            (\\.|[^\\])
 "add"                                           |
 "sub"                                           |
 "mul"                                           |
-"div"                                           { TOKWRITE(OP, yytext); yylval.str = strdup(yytext); return OP; }
+"div"                                           { TOKWRITE(OP, yytext); yylval = strdup(yytext); return OP; }
 
 %{
     /* punctuators */
