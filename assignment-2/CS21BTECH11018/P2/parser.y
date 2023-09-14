@@ -213,6 +213,21 @@ loop_block                  : loop_while_block
                             ;
 
 loop_while_block            : 'loop' 'while' predicate 'do' block_scope
+                            | error
                             ;
 
+loop_for_block              : 'for' '(' expr_stmt ';' predicate ';' loop_for_update ')' block_scope
+                            | error
+                            ;
+
+loop_for_update             : unary_expr_rhs_body
+                            |
+                            | error
+                            ;
+
+// Return statements
+
+return_stmt                 : 'return' expr_term
+                            | error
+                            ;
 %%
