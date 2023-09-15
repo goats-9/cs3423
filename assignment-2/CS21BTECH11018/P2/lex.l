@@ -18,26 +18,15 @@
     #include <stdlib.h>
     #include <string.h>
     // Include parser header file
-    #include "y.tab.h"
+    #include "parser.tab.h"
 
     /* global defines */
     #define PREAMBLE            "Name: Gautam Singh\nID: CS21BTECH11018\n"
-    // define token types as indices into toknames
-    #define ID                  0
-    #define KEYWORD             1
-    #define PUNC                2
-    #define DTYPE               3
-    #define STRING              4
-    #define CHAR                4
-    #define NUMBER              4
-    #define OP                  5
-    #define UNARY_OP            5
-    #define BINARY_OP           5
-    #define REL_OP              5
-    #define SPECIAL             6
     // macro for writing to token file
-    #define TOKWRITE(tok, yytok) fprintf(tfile, "%s: %s\n", toknames[tok], yytok)
+    #define TOKWRITE(yytype, tokname, yytok) fprintf(tfile, "%s: %s\n", tokname, yytok); fprintf(pfile, "%s", yytok); yylval.str = strdup(yytok); return yytype
 
+    // File to write out tokens and parsed file
+    FILE *tfile, *pfile;
     /* doubly linked list struct */
     typedef struct node { 
         // Pointers to next and previous nodes
@@ -51,16 +40,6 @@
     /* global variables */
     // Start and end nodes of the double linked list
     node_t *start, *end;
-    // Array of names of each type of token
-    char *toknames[] = { 
-        "ID",
-        "reserved keyword",
-        "punctuation",
-        "datatype",
-        "constant",
-        "operator",
-        "special symbol",
-    };
     FILE *tfile;        // Filestream to output tokens.
 
     /* prototypes for linked list */
@@ -84,7 +63,7 @@ ws                                              {delim}+
 letter                                          [a-zA-Z]
 digit                                           [0-9]
 number                                          [+\-]?{digit}+
-special                                         [@#\*\-\+/\\:_]
+special                                         [@#\*\+/\\:_]
 char                                            (\\.|[^\\])
 
 %%
@@ -97,19 +76,22 @@ char                                            (\\.|[^\\])
     /* keywords */  
 %}
 
-"call"                                          |
-"class"                                         |
-"declare"                                       |
-"do"                                            |
-"expr"                                          |
-"for"                                           |
-"global"                                        |
-"in case that"                                  |
-"local"                                         |
-"loop"                                          |
-"return"                                        |
-"this"                                          |
-"while"                                         { TOKWRITE(KEYWORD, yytext); yylval = strdup(yytext); return KEYWORD; }
+"call"                                          { TOKWRITE(CALL, "reserved keyword", yytext); }
+"class"                                         { TOKWRITE(CLASS, "reserved keyword", yytext); }
+"declare"                                       { TOKWRITE(DECLARE, "reserved keyword", yytext); }
+"do"                                            { TOKWRITE(DO, "reserved keyword", yytext); }
+"expr"                                          { TOKWRITE(EXPR, "reserved keyword", yytext); }
+"false"                                         { TOKWRITE(FALSE, "reserved keyword", yytext); }
+"for"                                           { TOKWRITE(FOR, "reserved keyword", yytext); }
+"global"                                        { TOKWRITE(GLOBAL, "reserved keyword", yytext); }
+"in case that"                                  { TOKWRITE(INCASE, "reserved keyword", yytext); }
+"local"                                         { TOKWRITE(LOCAL, "reserved keyword", yytext); }
+"loop"                                          { TOKWRITE(LOOP, "reserved keyword", yytext); }
+"otherwise"                                     { TOKWRITE(OTHERWISE, "reserved keyword", yytext); }
+"return"                                        { TOKWRITE(RETURN, "reserved keyword", yytext); }
+"this"                                          { TOKWRITE(THIS, "reserved keyword", yytext); }
+"true"                                          { TOKWRITE(TRUE, "reserved keyword", yytext); }
+"while"                                         { TOKWRITE(WHILE, "reserved keyword", yytext); }
 
 %{
     /* datatypes */
@@ -118,45 +100,48 @@ char                                            (\\.|[^\\])
 "int"                                           |
 "char"                                          |
 "string"                                        |
-"bool"                                          |
-"void"                                          { TOKWRITE(DTYPE, yytext); yylval = strdup(yytext); return DTYPE; }
+"bool"                                          { TOKWRITE(DTYPE, "datatype", yytext); }
+"void"                                          { TOKWRITE(VOID, "datatype", yytext); }
 
 %{
     /* operators */
 %}
 
-"neg"                                           |   
+"neg"                                           { TOKWRITE(UNARY_LOGICAL_OP, "operator", yytext); }   
 "gteq"                                          |
 "gt"                                            |
 "lteq"                                          |
 "lt"                                            |
 "eq"                                            |
-"ne"                                            |
+"ne"                                            { TOKWRITE(BINARY_LOGICAL_OP, "operator", yytext); }
 "and"                                           |
-"or"                                            |
+"or"                                            { TOKWRITE(LOGICAL_JOIN_OP, "operator", yytext); }
 "add"                                           |
 "sub"                                           |
 "mul"                                           |
-"div"                                           { TOKWRITE(OP, yytext); yylval = strdup(yytext); return OP; }
+"div"                                           { TOKWRITE(ARTH_OP, "operator", yytext); }
+"postincr"                                      |
+"postdecr"                                      { TOKWRITE(UNARY_OP, "operator", yytext); }
+"="                                             { TOKWRITE(ASGN_OP, "operator", yytext); }
 
 %{
     /* punctuators */
 %}
 
-","                                             |
-";"                                             |
-":"                                             { TOKWRITE(PUNC, yytext); return PUNC; }
+","                                             { TOKWRITE(COMMA, "punctuation", yytext); }
+";"                                             { TOKWRITE(SEMICOLON, "punctuation", yytext); }
+"->"                                            { TOKWRITE(ARROW, "punctuator", yytext); }
 
 %{
     /* special symbols */
 %}
 
-"("                                             |
-")"                                             |
-"{"                                             |
-"}"                                             |
-"["                                             |
-"]"                                             { TOKWRITE(PUNC, yytext); return PUNC; }
+"("                                             { TOKWRITE(L_PAREN, "special symbol", yytext); }
+")"                                             { TOKWRITE(R_PAREN, "special symbol", yytext); }
+"{"                                             { TOKWRITE(L_BRACE, "special symbol", yytext); }
+"}"                                             { TOKWRITE(R_BRACE, "special symbol", yytext); }
+"["                                             { TOKWRITE(L_SQUARE, "special symbol", yytext); }
+"]"                                             { TOKWRITE(R_SQUARE, "special symbol", yytext); }
 
 %{
     /* constants */
@@ -170,15 +155,15 @@ char                                            (\\.|[^\\])
     // has been lexed to omit the start and end quotes.
 %}
 
-{number}                                        { TOKWRITE(CONST, yytext); return CONST; }
-[']({char})?[']                                 |
-["]{char}*["]                                   { TOKWRITE(PUNC, "'"); yytext[yyleng - 1] = '\0'; ++yytext; TOKWRITE(CONST, yytext); TOKWRITE(PUNC, "'"); }
+{number}                                        { TOKWRITE(NUMBER, "constant", yytext); }
+[']({char})?[']                                 { yylval.str = strdup(yytext); fprintf(tfile, "punctuation: \'\n"); yytext[yyleng-1] = '\0'; ++yytext; fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \'\n"); return CONST; }
+["]{char}*["]                                   { yylval.str = strdup(yytext); fprintf(tfile, "punctuation: \"\n"); yytext[yyleng-1] = '\0'; ++yytext; fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \"\n"); return CONST; }
 
 %{
     /* identifiers */
 %}
 
-{special}?({letter}|{digit})*                   { TOKWRITE(ID, yytext); return ID; }
+({letter}|{digit}|{special})*                   { TOKWRITE(ID, "identifier", yytext); }
 
 %{
     /* whitespaces, newlines and bad characters */
@@ -187,16 +172,9 @@ char                                            (\\.|[^\\])
     // are reflected in the generated C code.
 %}
 
-\n                                              { 
-                                                    ++yylineno; 
-                                                    addNode(end, newNode(yytext, yytext, PUNC)); 
-                                                    if (yylineno + 1 > labelsz) { 
-                                                        labelarr = realloc(labelarr, (yylineno+1)*sizeof(int)); 
-                                                        labelsz = yylineno + 1; 
-                                                    }
-                                                }
-{ws}                                            { }
-.                                               { fprintf(tfile, "Error at line pp%d\n", yylineno); return 0; }
+\n                                              { ++yylineno; fprintf(pfile, "%s", yytext); }
+{ws}                                            { fprintf(pfile, "%s", yytext); }
+.                                               { printf("Lexical error\n"); }
 
 %%
 
@@ -225,7 +203,7 @@ void addNode (node_t *end, node_t *nextNode) {
 // function to find the token in the linked list
 // and return the type of token it represents
 int findLL (node_t *start, char *yytok) { 
-    node_t curr = start;
+    node_t *curr = start;
     while (curr) {
         if (!strcmp(yytok, curr->lexeme)) return curr->type;
         curr = curr->next;
@@ -270,34 +248,4 @@ void printLL(node_t *start) {
         fprintf(stdout, "%d: %s\n", curr->type, curr->lexeme);
         curr = curr->next;
     }
-}
-
-// main function
-int main(int argc, char *argv[]) {
-    // argv[1] : path to source file
-    // argv[2] : path to token file
-    // argv[3] : path to C file
-    // yyin is input filestream
-    yyin = fopen(argv[1], "r");
-    if (!yyin) { 
-        printf("Cannot open the input file.\n");
-        return -1;
-    }
-    tfile = fopen(argv[2], "w");
-    fprintf(tfile, PREAMBLE);
-    // initialize labelarr
-    labelarr = malloc(sizeof(int));
-    labelsz = 1;
-    // initialize the doubly linked list
-    initLL(&start, &end);
-    // lex through the input filestream
-    while(yylex());
-    // generate C code
-    cfile = fopen(argv[3], "w");
-    gen_C(start);
-    // destroy the doubly linked list
-    destroyLL(&start);
-    // close the files
-    fclose(cfile), fclose(tfile);
-    return 0;
 }
