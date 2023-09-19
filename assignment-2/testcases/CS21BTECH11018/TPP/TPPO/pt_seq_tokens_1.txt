@@ -1,3 +1,5 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
 reserved keyword: global
 datatype: void
 identifier: foo
@@ -41,6 +43,9 @@ identifier: i
 special symbol: )
 punctuation: ;
 special symbol: }
+reserved keyword: return
+datatype: void
+punctuation: ;
 special symbol: }
 reserved keyword: class
 identifier: class_bar
@@ -83,7 +88,7 @@ special symbol: )
 operator: and
 special symbol: (
 identifier: x
-operator: gteq
+operator: geq
 constant: 3
 special symbol: )
 special symbol: )
@@ -104,9 +109,11 @@ constant: 4
 punctuation: ;
 special symbol: }
 reserved keyword: return
+operator: postincr
+special symbol: (
 identifier: x
+special symbol: )
 punctuation: ;
-special symbol: }
 special symbol: }
 reserved keyword: global
 datatype: void
@@ -123,13 +130,12 @@ identifier: obj
 punctuator: ->
 identifier: bar
 special symbol: [
-constant: 1
+constant: 10103941234
 special symbol: ]
 special symbol: (
-constant: 20
+punctuation: "
+constant: asdasds
+punctuation: "
 special symbol: )
-punctuation: ;
-reserved keyword: return
-datatype: void
 punctuation: ;
 special symbol: }

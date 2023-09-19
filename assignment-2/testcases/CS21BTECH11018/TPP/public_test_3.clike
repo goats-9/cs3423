@@ -1,0 +1,4 @@
+global void postincr()
+{
+    declare int x, y, z;
+}

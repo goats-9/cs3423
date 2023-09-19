@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_PARSER_TAB_H_INCLUDED
-# define YY_YY_PARSER_TAB_H_INCLUDED
+#ifndef YY_YY_Y_TAB_H_INCLUDED
+# define YY_YY_Y_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -62,50 +62,42 @@ extern int yydebug;
     ARTH_OP = 263,                 /* ARTH_OP  */
     UNARY_LOGICAL_OP = 264,        /* UNARY_LOGICAL_OP  */
     BINARY_LOGICAL_OP = 265,       /* BINARY_LOGICAL_OP  */
-    LOGICAL_JOIN_OP = 266,         /* LOGICAL_JOIN_OP  */
-    GLOBAL = 267,                  /* GLOBAL  */
-    LOCAL = 268,                   /* LOCAL  */
-    CLASS = 269,                   /* CLASS  */
-    DECLARE = 270,                 /* DECLARE  */
-    EXPR = 271,                    /* EXPR  */
-    TRUE = 272,                    /* TRUE  */
-    FALSE = 273,                   /* FALSE  */
-    LOOP = 274,                    /* LOOP  */
-    WHILE = 275,                   /* WHILE  */
-    DO = 276,                      /* DO  */
-    CALL = 277,                    /* CALL  */
-    INCASE = 278,                  /* INCASE  */
-    OTHERWISE = 279,               /* OTHERWISE  */
-    RETURN = 280,                  /* RETURN  */
-    FOR = 281,                     /* FOR  */
-    THIS = 282,                    /* THIS  */
-    L_PAREN = 283,                 /* L_PAREN  */
-    R_PAREN = 284,                 /* R_PAREN  */
-    L_SQUARE = 285,                /* L_SQUARE  */
-    R_SQUARE = 286,                /* R_SQUARE  */
-    L_BRACE = 287,                 /* L_BRACE  */
-    R_BRACE = 288,                 /* R_BRACE  */
-    ASGN_OP = 289,                 /* ASGN_OP  */
-    SEMICOLON = 290,               /* SEMICOLON  */
-    COMMA = 291,                   /* COMMA  */
-    ARROW = 292,                   /* ARROW  */
-    VOID = 293                     /* VOID  */
+    AND = 266,                     /* AND  */
+    OR = 267,                      /* OR  */
+    GLOBAL = 268,                  /* GLOBAL  */
+    LOCAL = 269,                   /* LOCAL  */
+    CLASS = 270,                   /* CLASS  */
+    DECLARE = 271,                 /* DECLARE  */
+    EXPR = 272,                    /* EXPR  */
+    TRUE = 273,                    /* TRUE  */
+    FALSE = 274,                   /* FALSE  */
+    LOOP = 275,                    /* LOOP  */
+    WHILE = 276,                   /* WHILE  */
+    DO = 277,                      /* DO  */
+    CALL = 278,                    /* CALL  */
+    INCASE = 279,                  /* INCASE  */
+    OTHERWISE = 280,               /* OTHERWISE  */
+    RETURN = 281,                  /* RETURN  */
+    FOR = 282,                     /* FOR  */
+    THIS = 283,                    /* THIS  */
+    L_PAREN = 284,                 /* L_PAREN  */
+    R_PAREN = 285,                 /* R_PAREN  */
+    L_SQUARE = 286,                /* L_SQUARE  */
+    R_SQUARE = 287,                /* R_SQUARE  */
+    L_BRACE = 288,                 /* L_BRACE  */
+    R_BRACE = 289,                 /* R_BRACE  */
+    ASGN_OP = 290,                 /* ASGN_OP  */
+    SEMICOLON = 291,               /* SEMICOLON  */
+    COMMA = 292,                   /* COMMA  */
+    ARROW = 293,                   /* ARROW  */
+    VOID = 294                     /* VOID  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 33 "parser.y"
-
-    char *str;
-
-#line 106 "parser.tab.h"
-
-};
-typedef union YYSTYPE YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -117,4 +109,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_PARSER_TAB_H_INCLUDED  */
+#endif /* !YY_YY_Y_TAB_H_INCLUDED  */

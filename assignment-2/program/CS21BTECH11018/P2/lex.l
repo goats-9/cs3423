@@ -6,8 +6,8 @@
     File    : lex.l
     Purpose : Lex source code for C-like program language. Takes program source
               code and: 
-              1. Outputs a file containing a sequence of tokens along with their
-              type. 
+              1. Outputs a file `seq_tokens.txt` containing a sequence of tokens
+              along with their type. 
               2. Returns token type to parser.
     */
 %}
@@ -18,53 +18,41 @@
     #include <stdlib.h>
     #include <string.h>
     // Include parser header file
-    #include "parser.tab.h"
+    #include "y.tab.h"
 
     /* global defines */
-    #define PREAMBLE            "Name: Gautam Singh\nID: CS21BTECH11018\n"
-    // macro for writing to token file
-    #define TOKWRITE(yytype, tokname, yytok) fprintf(tfile, "%s: %s\n", tokname, yytok); fprintf(pfile, "%s", yytok); yylval.str = strdup(yytok); return yytype
+    // macro for writing to token file and parsed file
+    #define TOKWRITE(yytype, tokname, yytok) fprintf(tfile, "%s: %s\n", tokname, yytok); fprintf(pfile, "%s", yytok); return yytype
 
     // File to write out tokens and parsed file
     FILE *tfile, *pfile;
-    /* doubly linked list struct */
-    typedef struct node { 
-        // Pointers to next and previous nodes
-        struct node *next, *prev;
-        // Actual lexeme
-        char *lexeme;
-        // Type of lexeme
-        int type;
-    } node_t;
+    int yyerrfl, yytype;
 
-    /* global variables */
-    // Start and end nodes of the double linked list
-    node_t *start, *end;
-    FILE *tfile;        // Filestream to output tokens.
-
-    /* prototypes for linked list */
-    node_t *newNode (char *, int);
-    int findLL (node_t *, char *);
-    void addNode (node_t *, node_t *);
-    void deleteNode (node_t *);
-    void initLL (node_t **, node_t **);
-    void destroyLL (node_t **);
-    void printLL (node_t *);
+    // Array of statement types
+    char *stmt_type[] = {
+        "function definition",
+        "class definition",
+        "declaration statement",
+        "expression statement",
+        "call statement",
+        "call statement with object",
+        "loop",
+        "conditional statement",
+        "return statement",
+    };
 %}
-
-%option noinput nounput
 
 %{
     /* regular definitions */
 %}
 
-delim                                           [ \t\n]
+delim                                           [ \t]
 ws                                              {delim}+
 letter                                          [a-zA-Z]
 digit                                           [0-9]
 number                                          [+\-]?{digit}+
 special                                         [@#\*\+/\\:_]
-char                                            (\\.|[^\\])
+char                                            (\\.|[^"\\])
 
 %%
 
@@ -108,9 +96,9 @@ char                                            (\\.|[^\\])
 %}
 
 "neg"                                           { TOKWRITE(UNARY_LOGICAL_OP, "operator", yytext); }   
-"gteq"                                          |
+"geq"                                           |
 "gt"                                            |
-"lteq"                                          |
+"leq"                                           |
 "lt"                                            |
 "eq"                                            |
 "ne"                                            { TOKWRITE(BINARY_LOGICAL_OP, "operator", yytext); }
@@ -156,8 +144,8 @@ char                                            (\\.|[^\\])
 %}
 
 {number}                                        { TOKWRITE(NUMBER, "constant", yytext); }
-[']({char})?[']                                 { yylval.str = strdup(yytext); fprintf(tfile, "punctuation: \'\n"); yytext[yyleng-1] = '\0'; ++yytext; fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \'\n"); return CONST; }
-["]{char}*["]                                   { yylval.str = strdup(yytext); fprintf(tfile, "punctuation: \"\n"); yytext[yyleng-1] = '\0'; ++yytext; fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \"\n"); return CONST; }
+[']{char}?[']                                   { fprintf(pfile, yytext); fprintf(tfile, "punctuation: \'\n"); yytext[yyleng-1] = '\0'; ++yytext; if (yytext) fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \'\n"); return CONST; }
+["]{char}+["]                                   { fprintf(pfile, yytext); fprintf(tfile, "punctuation: \"\n"); yytext[yyleng-1] = '\0'; ++yytext; if (yytext) fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \"\n"); return CONST; }
 
 %{
     /* identifiers */
@@ -169,83 +157,11 @@ char                                            (\\.|[^\\])
     /* whitespaces, newlines and bad characters */
 
     // yylineno is incremented here and whitespaces
-    // are reflected in the generated C code.
+    // are reflected in the .parsed file.
 %}
 
-\n                                              { ++yylineno; fprintf(pfile, "%s", yytext); }
+\n                                              { ++yylineno; if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } if(yytype != -1) { fprintf(pfile, " : %s", stmt_type[yytype]); yytype = -1; } fprintf(pfile, "\n"); }
 {ws}                                            { fprintf(pfile, "%s", yytext); }
-.                                               { printf("Lexical error\n"); }
+.                                               { printf("%d: Lexical error: %s\n", yylineno, yytext); return 0; }
 
 %%
-
-/* auxiliary functions */
-
-// function to create a new node in the linked list
-node_t *newNode (char *lexeme, int type) { 
-    node_t *retnode = (node_t *)malloc(sizeof(node_t));
-    // Dynamically allocate memory to char * elements of struct
-    if (lexeme) {
-        retnode->lexeme = (char *)malloc(strlen(lexeme)+1);
-        strcpy(retnode->lexeme, lexeme);
-    } else retnode->lexeme = lexeme;
-    retnode->type = type;
-    return retnode;
-}
-
-// function to add a new node to end in the linked list
-void addNode (node_t *end, node_t *nextNode) {
-    nextNode->prev = end->prev;
-    end->prev = nextNode;
-    nextNode->next = end;
-    nextNode->prev->next = nextNode;
-}
-
-// function to find the token in the linked list
-// and return the type of token it represents
-int findLL (node_t *start, char *yytok) { 
-    node_t *curr = start;
-    while (curr) {
-        if (!strcmp(yytok, curr->lexeme)) return curr->type;
-        curr = curr->next;
-    }
-    return -1;
-}
-
-// function to initialize linked list
-void initLL (node_t **start, node_t **end) { 
-    // Assign dummy values to sentinels
-    *start = newNode(NULL, -1);
-    *end = newNode(NULL, -1);
-    // Link sentinels to each other
-    (*start)->next = *end;
-    (*end)->prev = *start;
-}
-
-// function to destroy the linked list
-void destroyLL(node_t **start) {
-    node_t *next;
-    node_t *curr = *start;
-    while (curr) {
-        next = curr->next;
-        // Free pointers inside node
-        free(curr->lexeme), free(curr);
-        curr = next;
-    }
-}
-
-// function to delete a node in a doubly linked list
-void deleteNode(node_t *node) {
-    if (node->prev) node->prev->next = node->next;
-    if (node->next) node->next->prev = node->prev;
-    // free the node and its pointers
-    free(node->lexeme), free(node);
-}
-
-// function to print the doubly linked list
-void printLL(node_t *start) { 
-    node_t *curr = start;
-    while (curr) { 
-        fprintf(stdout, "%d: %s\n", curr->type, curr->lexeme);
-        curr = curr->next;
-    }
-}

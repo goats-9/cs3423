@@ -1,0 +1,7 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+reserved keyword: global
+datatype: void
+operator: postincr
+special symbol: (
+special symbol: )
