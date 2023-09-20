@@ -1,4 +1,8 @@
-global void postincr()
-{
-    declare int x, y, z;
+global void poseteincr()
+{ 
+    for (expr v = 2; add(v,1) geq add(1,v); postdecr(v))
+    {
+    }
+    return void;
 }
+return this_is_a_fail;

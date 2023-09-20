@@ -24,8 +24,11 @@
     extern FILE *yyin, *tfile, *pfile;
     extern int yylineno;
     extern int yyerrfl;     // For flagging an error
-    extern int yytype;      // For determining type of statement parsed
+    extern int yytype;      // For determining type of statement parsed 
+                            // based on ending character, which is either 
+                            // ';' (0), ')' (1), ']' (2)
     int yyretcnt;           // For counting number of return statements
+    char *yytypename;
 
     /* prototypes for yylex and yyerror */
     int yylex();
@@ -43,7 +46,6 @@
 %token UNARY_LOGICAL_OP
 %token BINARY_LOGICAL_OP
 %token LOGICAL_JOIN_OP
-%token AND_OP OR_OP
 %token GLOBAL LOCAL
 %token CLASS
 %token DECLARE
@@ -61,14 +63,15 @@
 %token L_PAREN R_PAREN L_SQUARE R_SQUARE L_BRACE R_BRACE ASGN_OP
 %token SEMICOLON COMMA ARROW
 %token VOID
+%token TOK_EOF
 
 %%
 
 // Program productions
 
 program                     : program_body
-                            |
-                            | error { yyerrfl = 1; }
+                            | TOK_EOF
+                            | error
                             ;
 
 program_body                : program_body GLOBAL function_definition block_scope { if (!yyretcnt) { fprintf(pfile, "\ninvalid statement"); return 1; } yyretcnt = 0; }
@@ -77,27 +80,27 @@ program_body                : program_body GLOBAL function_definition block_scop
                             | class
                             ;
 
-// Function and class prototypes
+// Function and class definitions
 
 function                    : GLOBAL function_definition block_scope { if (!yyretcnt) { fprintf(pfile, "\ninvalid statement"); return 1; } yyretcnt = 0; }
                             | LOCAL function_definition block_scope { if (!yyretcnt) { fprintf(pfile, "\ninvalid statement"); return 1; } yyretcnt = 0; } 
                             ;
 
-function_definition         : dtype_or_void ID num_args L_PAREN args R_PAREN { yytype = 0; }
+function_definition         : { yytype = 1; } dtype_or_void ID num_args L_PAREN args R_PAREN { fprintf(pfile, " : function definition"); }
                             ;
 
 dtype_or_void               : DTYPE
                             | VOID
                             ;
 
-class                       : class_definition block_scope
+class                       : class_definition block_scope { if (yyerrfl) { fprintf(pfile, "\ninvalid statement"); return 1; } }
                             ;
 
-class_definition            : CLASS ID num_args { yytype = 1; }
+class_definition            : { yytype = 2; } CLASS ID num_args { fprintf(pfile, " : class definition"); }
                             ;
 
-block_scope                 : L_BRACE blocks R_BRACE
-                            | error { fprintf(pfile, "\ninvalid statement"); return 1; }
+block_scope                 : L_BRACE blocks { yytype = 3; } R_BRACE
+                            | L_BRACE R_BRACE
                             ;
 
 // Argument declarations
@@ -129,19 +132,19 @@ block                       : stmt
                             | class
                             ;
 
-stmt                        : stmt_body SEMICOLON
+stmt                        : { yytype = 0; } stmt_body SEMICOLON { fprintf(pfile, " : %s statement", yytypename); }
                             ;
 
-stmt_body                   : decl_stmt
+stmt_body                   : decl_stmt { yytypename = "declaration"; }
                             | expr_stmt
                             | call_stmt
-                            | return_stmt
+                            | return_stmt { yytypename = "return"; ++yyretcnt; }
                             ;
 
 // Declaration statements
 
-decl_stmt                   : DECLARE ID id_comma { yytype = 2; }
-                            | DECLARE DTYPE id_comma { yytype = 2; }
+decl_stmt                   : DECLARE ID id_comma
+                            | DECLARE DTYPE id_comma
                             ;
 
 id_comma                    : id_comma COMMA ID
@@ -150,8 +153,8 @@ id_comma                    : id_comma COMMA ID
 
 // Expression statements
 
-expr_stmt                   : unary_expr_rhs_body { yytype = 4; }
-                            | EXPR ID ASGN_OP expr_term { yytype = 3; }
+expr_stmt                   : unary_expr_rhs_body { yytypename = "call"; }
+                            | EXPR ID ASGN_OP expr_term { yytypename = "expression"; }
                             ;
 
 unary_expr_rhs_body         : UNARY_OP L_PAREN unary_expr_term R_PAREN
@@ -175,7 +178,7 @@ call_stmt                   : CALL method_call
                             | CALL function_call
                             ;
 
-method_call                 : method_name num_args L_PAREN call_params R_PAREN { yytype = 5; }
+method_call                 : method_name num_args L_PAREN call_params R_PAREN { yytypename = "call statement with object"; }
                             ;
 
 method_name                 : method_name_opt ARROW ID
@@ -186,7 +189,7 @@ method_name_opt             : method_name_opt ARROW ID
                             | THIS
                             ;
 
-function_call               : ID num_args L_PAREN call_params R_PAREN { yytype = 4; }
+function_call               : ID num_args L_PAREN call_params R_PAREN { yytypename = "call"; }
                             ;
 
 call_params                 : call_params COMMA call_types
@@ -202,7 +205,7 @@ call_types                  : ID
 
 // Return statements
 
-return_stmt                 : RETURN returnable { yytype = 8; ++yyretcnt; }
+return_stmt                 : RETURN returnable
 
 returnable                  : expr_term
                             | VOID
@@ -211,7 +214,7 @@ returnable                  : expr_term
 
 // Conditional blocks
 
-cond_block                  : INCASE L_PAREN predicate R_PAREN { yytype = 7; } DO block_scope otherwise_block
+cond_block                  : { yytype = 1; } INCASE L_PAREN predicate R_PAREN { fprintf(pfile, " : conditional statement"); } DO block_scope otherwise_block
                             ;
 
 otherwise_block             : OTHERWISE block_scope
@@ -243,10 +246,10 @@ loop_block                  : loop_while_block
                             | loop_for_block
                             ;
 
-loop_while_block            : LOOP WHILE { yytype = 6; } predicate DO block_scope
+loop_while_block            : { yytype = 1; } LOOP WHILE L_PAREN predicate R_PAREN { fprintf(pfile, " : loop"); } DO block_scope
                             ;
 
-loop_for_block              : FOR L_PAREN expr_stmt SEMICOLON predicate SEMICOLON loop_for_update R_PAREN { yytype = 6; } block_scope
+loop_for_block              : { yytype = 1; } FOR L_PAREN expr_stmt SEMICOLON predicate SEMICOLON loop_for_update R_PAREN { fprintf(pfile, " : loop"); } block_scope
                             ;
 
 loop_for_update             : unary_expr_rhs_body
@@ -256,6 +259,7 @@ loop_for_update             : unary_expr_rhs_body
 %%
 
 int main(int argc, char *argv[]) {
+    yytype = -1;
     yyretcnt = 0;
     // Set input filestream
     if (argv[1]) yyin = fopen(argv[1], "r");

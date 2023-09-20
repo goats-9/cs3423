@@ -32,6 +32,9 @@ class baz[2]
     {
         declare char donothing;
         expr donothing = 'y';
+        for (expr v = 1; v lt 4; postdecr(v)) {
+            deaclare int x; postincr(x);
+        }
     }
 }
 global void main ()

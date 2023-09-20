@@ -23,23 +23,12 @@
     /* global defines */
     // macro for writing to token file and parsed file
     #define TOKWRITE(yytype, tokname, yytok) fprintf(tfile, "%s: %s\n", tokname, yytok); fprintf(pfile, "%s", yytok); return yytype
+    // macro for handling errors at the end of statements
+    #define ERRCHECK(yyendtype, tokname, yytok) if (yyerrfl && (yytype == yyendtype)) { fprintf(tfile, "%s: %s\n", tokname, yytok); fprintf(pfile, "%s : invalid statement", yytok); exit(yyerrfl); } yytype = -1
 
     // File to write out tokens and parsed file
     FILE *tfile, *pfile;
     int yyerrfl, yytype;
-
-    // Array of statement types
-    char *stmt_type[] = {
-        "function definition",
-        "class definition",
-        "declaration statement",
-        "expression statement",
-        "call statement",
-        "call statement with object",
-        "loop",
-        "conditional statement",
-        "return statement",
-    };
 %}
 
 %{
@@ -51,7 +40,7 @@ ws                                              {delim}+
 letter                                          [a-zA-Z]
 digit                                           [0-9]
 number                                          [+\-]?{digit}+
-special                                         [@#\*\+/\\:_\-]
+special                                         [@#\*\+/\\:_]
 char                                            (\\.|[^"\\])
 
 %%
@@ -117,7 +106,7 @@ char                                            (\\.|[^"\\])
 %}
 
 ","                                             { TOKWRITE(COMMA, "punctuation", yytext); }
-";"                                             { TOKWRITE(SEMICOLON, "punctuation", yytext); }
+";"                                             { ERRCHECK(0, "punctuation", yytext); TOKWRITE(SEMICOLON, "punctuation", yytext); }
 "->"                                            { TOKWRITE(ARROW, "punctuator", yytext); }
 
 %{
@@ -125,11 +114,11 @@ char                                            (\\.|[^"\\])
 %}
 
 "("                                             { TOKWRITE(L_PAREN, "special symbol", yytext); }
-")"                                             { TOKWRITE(R_PAREN, "special symbol", yytext); }
+")"                                             { ERRCHECK(1, "special symbol", yytext); TOKWRITE(R_PAREN, "special symbol", yytext); }
 "{"                                             { TOKWRITE(L_BRACE, "special symbol", yytext); }
 "}"                                             { TOKWRITE(R_BRACE, "special symbol", yytext); }
 "["                                             { TOKWRITE(L_SQUARE, "special symbol", yytext); }
-"]"                                             { TOKWRITE(R_SQUARE, "special symbol", yytext); }
+"]"                                             { ERRCHECK(2, "special symbol", yytext); TOKWRITE(R_SQUARE, "special symbol", yytext); }
 
 %{
     /* constants */
@@ -151,7 +140,7 @@ char                                            (\\.|[^"\\])
     /* identifiers */
 %}
 
-({letter}|{special})({letter}|{digit})*         { TOKWRITE(ID, "identifier", yytext); }
+({letter}|{special}|{digit})+                   { TOKWRITE(ID, "identifier", yytext); }
 
 %{
     /* whitespaces, newlines and bad characters */
@@ -160,9 +149,10 @@ char                                            (\\.|[^"\\])
     // are reflected in the .parsed file.
 %}
 
-\n                                              { ++yylineno; if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } if(yytype != -1) { fprintf(pfile, " : %s", stmt_type[yytype]); yytype = -1; } fprintf(pfile, "\n"); }
+\n                                              { ++yylineno; if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(1); } fprintf(pfile, "\n"); }
 {ws}                                            { fprintf(pfile, "%s", yytext); }
 .                                               { printf("%d: Lexical error: %s\n", yylineno, yytext); return 0; }
-<<EOF>>                                         { if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } if(yytype != -1) { fprintf(pfile, " : %s", stmt_type[yytype]); yytype = -1; } }
+<<EOF>>                                         { if (yyerrfl) { fprintf(pfile, "\ninvalid statement", yytype); exit(yyerrfl); } return TOK_EOF; }
 
 %%
+

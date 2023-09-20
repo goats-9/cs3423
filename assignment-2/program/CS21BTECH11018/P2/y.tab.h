@@ -63,38 +63,79 @@ extern int yydebug;
     UNARY_LOGICAL_OP = 264,        /* UNARY_LOGICAL_OP  */
     BINARY_LOGICAL_OP = 265,       /* BINARY_LOGICAL_OP  */
     LOGICAL_JOIN_OP = 266,         /* LOGICAL_JOIN_OP  */
-    AND_OP = 267,                  /* AND_OP  */
-    OR_OP = 268,                   /* OR_OP  */
-    GLOBAL = 269,                  /* GLOBAL  */
-    LOCAL = 270,                   /* LOCAL  */
-    CLASS = 271,                   /* CLASS  */
-    DECLARE = 272,                 /* DECLARE  */
-    EXPR = 273,                    /* EXPR  */
-    TRUE = 274,                    /* TRUE  */
-    FALSE = 275,                   /* FALSE  */
-    LOOP = 276,                    /* LOOP  */
-    WHILE = 277,                   /* WHILE  */
-    DO = 278,                      /* DO  */
-    CALL = 279,                    /* CALL  */
-    INCASE = 280,                  /* INCASE  */
-    OTHERWISE = 281,               /* OTHERWISE  */
-    RETURN = 282,                  /* RETURN  */
-    FOR = 283,                     /* FOR  */
-    THIS = 284,                    /* THIS  */
-    L_PAREN = 285,                 /* L_PAREN  */
-    R_PAREN = 286,                 /* R_PAREN  */
-    L_SQUARE = 287,                /* L_SQUARE  */
-    R_SQUARE = 288,                /* R_SQUARE  */
-    L_BRACE = 289,                 /* L_BRACE  */
-    R_BRACE = 290,                 /* R_BRACE  */
-    ASGN_OP = 291,                 /* ASGN_OP  */
-    SEMICOLON = 292,               /* SEMICOLON  */
-    COMMA = 293,                   /* COMMA  */
-    ARROW = 294,                   /* ARROW  */
-    VOID = 295                     /* VOID  */
+    GLOBAL = 267,                  /* GLOBAL  */
+    LOCAL = 268,                   /* LOCAL  */
+    CLASS = 269,                   /* CLASS  */
+    DECLARE = 270,                 /* DECLARE  */
+    EXPR = 271,                    /* EXPR  */
+    TRUE = 272,                    /* TRUE  */
+    FALSE = 273,                   /* FALSE  */
+    LOOP = 274,                    /* LOOP  */
+    WHILE = 275,                   /* WHILE  */
+    DO = 276,                      /* DO  */
+    CALL = 277,                    /* CALL  */
+    INCASE = 278,                  /* INCASE  */
+    OTHERWISE = 279,               /* OTHERWISE  */
+    RETURN = 280,                  /* RETURN  */
+    FOR = 281,                     /* FOR  */
+    THIS = 282,                    /* THIS  */
+    L_PAREN = 283,                 /* L_PAREN  */
+    R_PAREN = 284,                 /* R_PAREN  */
+    L_SQUARE = 285,                /* L_SQUARE  */
+    R_SQUARE = 286,                /* R_SQUARE  */
+    L_BRACE = 287,                 /* L_BRACE  */
+    R_BRACE = 288,                 /* R_BRACE  */
+    ASGN_OP = 289,                 /* ASGN_OP  */
+    SEMICOLON = 290,               /* SEMICOLON  */
+    COMMA = 291,                   /* COMMA  */
+    ARROW = 292,                   /* ARROW  */
+    VOID = 293,                    /* VOID  */
+    TOK_EOF = 294                  /* TOK_EOF  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
+/* Token kinds.  */
+#define YYEMPTY -2
+#define YYEOF 0
+#define YYerror 256
+#define YYUNDEF 257
+#define ID 258
+#define DTYPE 259
+#define CONST 260
+#define NUMBER 261
+#define UNARY_OP 262
+#define ARTH_OP 263
+#define UNARY_LOGICAL_OP 264
+#define BINARY_LOGICAL_OP 265
+#define LOGICAL_JOIN_OP 266
+#define GLOBAL 267
+#define LOCAL 268
+#define CLASS 269
+#define DECLARE 270
+#define EXPR 271
+#define TRUE 272
+#define FALSE 273
+#define LOOP 274
+#define WHILE 275
+#define DO 276
+#define CALL 277
+#define INCASE 278
+#define OTHERWISE 279
+#define RETURN 280
+#define FOR 281
+#define THIS 282
+#define L_PAREN 283
+#define R_PAREN 284
+#define L_SQUARE 285
+#define R_SQUARE 286
+#define L_BRACE 287
+#define R_BRACE 288
+#define ASGN_OP 289
+#define SEMICOLON 290
+#define COMMA 291
+#define ARROW 292
+#define VOID 293
+#define TOK_EOF 294
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

@@ -12,4 +12,30 @@ global void foo () : function definition
     }
     return void; : return statement
 }
-class class_bar [1] : invalid statement
+class class_bar [1] : class definition
+{
+    declare int x; : declaration statement
+    expr x = 0; : expression statement
+    local int bar [1](int x) : function definition
+    {
+        postincr(x); : call statement
+        in case that ((x gt 0) and (x geq 3)) : conditional statement
+        do
+        {
+            expr x = 3; : expression statement
+        }
+        otherwise
+        {
+            expr x = 4; : expression statement
+        }
+        return postincr(x); : return statement
+    
+}
+global void main () : function definition
+{
+    declare class_bar obj; : declaration statement
+    call obj->bar[10103941234]("asdasds"); : call statement with object statement
+    return void; : return statement
+}
+
+invalid statement

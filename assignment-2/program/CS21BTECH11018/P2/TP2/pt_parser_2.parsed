@@ -1,4 +1,4 @@
-global void foo[1](int x)  : function definition
+global void foo[1](int x) : function definition 
 {
     return postincr(x); : return statement
 }
@@ -32,11 +32,5 @@ class baz[2] : class definition
     {
         declare char donothing; : declaration statement
         expr donothing = 'y'; : expression statement
-    }
-}
-global void main () : function definition
-{
-    declare baz boom; : declaration statement
-    call boom->gazzer(false); : call statement with object
-}
-invalid statement
+        for (expr v = 1; v lt 4; postdecr(v)) : loop {
+            deaclare int x; : invalid statement

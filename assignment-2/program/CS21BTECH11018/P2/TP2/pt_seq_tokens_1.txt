@@ -48,8 +48,97 @@ datatype: void
 punctuation: ;
 special symbol: }
 reserved keyword: class
-reserved keyword: class
-identifier: _bar
+identifier: class_bar
 special symbol: [
 constant: 1
 special symbol: ]
+special symbol: {
+reserved keyword: declare
+datatype: int
+identifier: x
+punctuation: ;
+reserved keyword: expr
+identifier: x
+operator: =
+constant: 0
+punctuation: ;
+reserved keyword: local
+datatype: int
+identifier: bar
+special symbol: [
+constant: 1
+special symbol: ]
+special symbol: (
+datatype: int
+identifier: x
+special symbol: )
+special symbol: {
+operator: postincr
+special symbol: (
+identifier: x
+special symbol: )
+punctuation: ;
+reserved keyword: in case that
+special symbol: (
+special symbol: (
+identifier: x
+operator: gt
+constant: 0
+special symbol: )
+operator: and
+special symbol: (
+identifier: x
+operator: geq
+constant: 3
+special symbol: )
+special symbol: )
+reserved keyword: do
+special symbol: {
+reserved keyword: expr
+identifier: x
+operator: =
+constant: 3
+punctuation: ;
+special symbol: }
+reserved keyword: otherwise
+special symbol: {
+reserved keyword: expr
+identifier: x
+operator: =
+constant: 4
+punctuation: ;
+special symbol: }
+reserved keyword: return
+operator: postincr
+special symbol: (
+identifier: x
+special symbol: )
+punctuation: ;
+special symbol: }
+reserved keyword: global
+datatype: void
+identifier: main
+special symbol: (
+special symbol: )
+special symbol: {
+reserved keyword: declare
+identifier: class_bar
+identifier: obj
+punctuation: ;
+reserved keyword: call
+identifier: obj
+punctuator: ->
+identifier: bar
+special symbol: [
+constant: 10103941234
+special symbol: ]
+special symbol: (
+punctuation: "
+constant: asdasds
+punctuation: "
+special symbol: )
+punctuation: ;
+reserved keyword: return
+datatype: void
+punctuation: ;
+special symbol: }

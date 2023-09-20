@@ -363,10 +363,10 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[167] =
     {   0,
         0,    0,   55,   53,   52,   51,   53,   50,   53,   41,
-       42,   50,   38,   50,   47,   39,   37,   45,   46,   50,
+       42,   50,   38,   53,   47,   39,   37,   45,   46,   50,
        50,   50,   50,   50,   50,   50,   50,   50,   50,   50,
        50,   50,   50,   50,   50,   50,   50,   43,   44,   52,
-        0,    0,   50,    0,   48,    0,   47,   40,   47,   50,
+        0,    0,   50,    0,   48,    0,   47,   47,   40,   50,
        50,   50,   50,   50,   50,   50,   50,    4,   27,   50,
        50,   50,   50,   50,   24,   50,   50,   50,   26,   50,
        28,   30,   50,   50,   50,   50,   50,   50,   50,   50,
@@ -416,8 +416,8 @@ static const YY_CHAR yy_ec[256] =
 
 static const YY_CHAR yy_meta[45] =
     {   0,
-        1,    1,    1,    1,    2,    1,    1,    1,    1,    1,
-        1,    1,    3,    1,    1,    1,    3,    1,    1,    1,
+        1,    1,    1,    1,    2,    3,    1,    1,    1,    3,
+        1,    1,    3,    1,    1,    1,    3,    1,    3,    1,
         3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
         3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
         3,    3,    1,    1
@@ -429,7 +429,7 @@ static const flex_int16_t yy_base[170] =
       186,  170,  186,   35,  169,  186,  186,  186,  186,   25,
       148,   31,   31,   20,   32,   38,  148,   41,  140,  153,
        31,  144,  151,   32,   44,  142,  146,  186,  186,   71,
-       72,   78,    0,  166,  165,   79,  158,  186,  157,  145,
+       72,   78,    0,  166,  165,   79,  158,  157,  186,  145,
       144,  134,  136,  144,  143,  140,  122,    0,    0,  127,
       130,  123,  123,  124,    0,   50,  121,   62,    0,  125,
       127,    0,  125,  115,  113,  114,  127,  119,  108,  117,
@@ -448,7 +448,7 @@ static const flex_int16_t yy_base[170] =
 static const flex_int16_t yy_def[170] =
     {   0,
       166,    1,  166,  166,  166,  166,  167,  168,  169,  166,
-      166,  168,  166,  168,  166,  166,  166,  166,  166,  168,
+      166,  168,  166,  166,  168,  166,  166,  166,  166,  168,
       168,  168,  168,  168,  168,  168,  168,  168,  168,  168,
       168,  168,  168,  168,  168,  168,  168,  166,  166,  166,
       167,  167,  168,  166,  166,  169,  168,  166,  166,  168,
@@ -473,8 +473,8 @@ static const flex_int16_t yy_nxt[231] =
        13,   14,   15,   16,   17,    4,    8,   18,    8,   19,
        20,   21,   22,   23,   24,   25,   26,    8,   27,   28,
        29,   30,   31,   32,    8,   33,   34,   35,    8,   36,
-       37,    8,   38,   39,   40,   45,   40,   47,   50,   43,
-       48,   53,   61,   97,   59,   56,   51,   46,   54,   57,
+       37,    8,   38,   39,   40,   45,   40,   48,   50,   43,
+       49,   53,   61,   97,   59,   56,   51,   46,   54,   57,
        55,   60,   63,   58,   62,   67,   72,   64,   73,   76,
        77,   78,   40,   68,   40,   65,   82,  165,   69,   79,
       166,  166,   41,   44,  100,  164,  139,   98,  163,  162,
@@ -486,9 +486,9 @@ static const flex_int16_t yy_nxt[231] =
       126,  125,  124,  123,  122,  121,  120,  119,  118,  117,
       116,  115,  114,  113,  112,  111,  110,  109,  108,  107,
       106,  105,  104,  103,  102,   99,   96,   95,   94,   93,
-       92,   91,   90,   89,   88,   87,   86,   85,   84,   49,
+       92,   91,   90,   89,   88,   87,   86,   85,   84,   48,
        47,   83,   83,   81,   80,   75,   74,   71,   70,   66,
-       52,   49,   47,   42,  166,    3,  166,  166,  166,  166,
+       52,   47,   47,   42,  166,    3,  166,  166,  166,  166,
       166,  166,  166,  166,  166,  166,  166,  166,  166,  166,
 
       166,  166,  166,  166,  166,  166,  166,  166,  166,  166,
@@ -515,7 +515,7 @@ static const flex_int16_t yy_chk[231] =
       106,  105,  104,  101,  100,   97,   96,   93,   92,   90,
        89,   88,   87,   86,   81,   80,   79,   78,   77,   76,
        75,   74,   73,   71,   70,   67,   64,   63,   62,   61,
-       60,   57,   56,   55,   54,   53,   52,   51,   50,   49,
+       60,   57,   56,   55,   54,   53,   52,   51,   50,   48,
        47,   45,   44,   37,   36,   33,   32,   30,   29,   27,
        21,   15,   12,    7,    3,  166,  166,  166,  166,  166,
       166,  166,  166,  166,  166,  166,  166,  166,  166,  166,
@@ -564,28 +564,17 @@ char *yytext;
     /* global defines */
     // macro for writing to token file and parsed file
     #define TOKWRITE(yytype, tokname, yytok) fprintf(tfile, "%s: %s\n", tokname, yytok); fprintf(pfile, "%s", yytok); return yytype
+    // macro for handling errors at the end of statements
+    #define ERRCHECK(yyendtype, tokname, yytok) if (yyerrfl && (yytype == yyendtype)) { fprintf(tfile, "%s: %s\n", tokname, yytok); fprintf(pfile, "%s : invalid statement", yytok); exit(yyerrfl); } yytype = -1
 
     // File to write out tokens and parsed file
     FILE *tfile, *pfile;
     int yyerrfl, yytype;
-
-    // Array of statement types
-    char *stmt_type[] = {
-        "function definition",
-        "class definition",
-        "declaration statement",
-        "expression statement",
-        "call statement",
-        "call statement with object",
-        "loop",
-        "conditional statement",
-        "return statement",
-    };
-#line 584 "lex.yy.c"
-#line 46 "lex.l"
+#line 573 "lex.yy.c"
+#line 35 "lex.l"
     /* regular definitions */
-#line 587 "lex.yy.c"
-#line 588 "lex.yy.c"
+#line 576 "lex.yy.c"
+#line 577 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -802,11 +791,11 @@ YY_DECL
 		}
 
 	{
-#line 57 "lex.l"
+#line 46 "lex.l"
 
 
 
-#line 61 "lex.l"
+#line 50 "lex.l"
     /* translation rules */
 
 
@@ -814,7 +803,7 @@ YY_DECL
     /* keywords */  
 
 
-#line 817 "lex.yy.c"
+#line 806 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -873,101 +862,101 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 68 "lex.l"
+#line 57 "lex.l"
 { TOKWRITE(CALL, "reserved keyword", yytext); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 69 "lex.l"
+#line 58 "lex.l"
 { TOKWRITE(CLASS, "reserved keyword", yytext); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 70 "lex.l"
+#line 59 "lex.l"
 { TOKWRITE(DECLARE, "reserved keyword", yytext); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 71 "lex.l"
+#line 60 "lex.l"
 { TOKWRITE(DO, "reserved keyword", yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 72 "lex.l"
+#line 61 "lex.l"
 { TOKWRITE(EXPR, "reserved keyword", yytext); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 73 "lex.l"
+#line 62 "lex.l"
 { TOKWRITE(FALSE, "reserved keyword", yytext); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 74 "lex.l"
+#line 63 "lex.l"
 { TOKWRITE(FOR, "reserved keyword", yytext); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 75 "lex.l"
+#line 64 "lex.l"
 { TOKWRITE(GLOBAL, "reserved keyword", yytext); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 76 "lex.l"
+#line 65 "lex.l"
 { TOKWRITE(INCASE, "reserved keyword", yytext); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 77 "lex.l"
+#line 66 "lex.l"
 { TOKWRITE(LOCAL, "reserved keyword", yytext); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 78 "lex.l"
+#line 67 "lex.l"
 { TOKWRITE(LOOP, "reserved keyword", yytext); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 79 "lex.l"
+#line 68 "lex.l"
 { TOKWRITE(OTHERWISE, "reserved keyword", yytext); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 80 "lex.l"
+#line 69 "lex.l"
 { TOKWRITE(RETURN, "reserved keyword", yytext); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 81 "lex.l"
+#line 70 "lex.l"
 { TOKWRITE(THIS, "reserved keyword", yytext); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 82 "lex.l"
+#line 71 "lex.l"
 { TOKWRITE(TRUE, "reserved keyword", yytext); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 83 "lex.l"
+#line 72 "lex.l"
 { TOKWRITE(WHILE, "reserved keyword", yytext); }
 	YY_BREAK
 
     /* datatypes */
 
 case 17:
-#line 90 "lex.l"
+#line 79 "lex.l"
 case 18:
-#line 91 "lex.l"
+#line 80 "lex.l"
 case 19:
-#line 92 "lex.l"
+#line 81 "lex.l"
 case 20:
 YY_RULE_SETUP
-#line 92 "lex.l"
+#line 81 "lex.l"
 { TOKWRITE(DTYPE, "datatype", yytext); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 93 "lex.l"
+#line 82 "lex.l"
 { TOKWRITE(VOID, "datatype", yytext); }
 	YY_BREAK
 
@@ -975,52 +964,52 @@ YY_RULE_SETUP
 
 case 22:
 YY_RULE_SETUP
-#line 99 "lex.l"
+#line 88 "lex.l"
 { TOKWRITE(UNARY_LOGICAL_OP, "operator", yytext); }   
 	YY_BREAK
 case 23:
-#line 101 "lex.l"
+#line 90 "lex.l"
 case 24:
-#line 102 "lex.l"
+#line 91 "lex.l"
 case 25:
-#line 103 "lex.l"
+#line 92 "lex.l"
 case 26:
-#line 104 "lex.l"
+#line 93 "lex.l"
 case 27:
-#line 105 "lex.l"
+#line 94 "lex.l"
 case 28:
 YY_RULE_SETUP
-#line 105 "lex.l"
+#line 94 "lex.l"
 { TOKWRITE(BINARY_LOGICAL_OP, "operator", yytext); }
 	YY_BREAK
 case 29:
-#line 107 "lex.l"
+#line 96 "lex.l"
 case 30:
 YY_RULE_SETUP
-#line 107 "lex.l"
+#line 96 "lex.l"
 { TOKWRITE(LOGICAL_JOIN_OP, "operator", yytext); }
 	YY_BREAK
 case 31:
-#line 109 "lex.l"
+#line 98 "lex.l"
 case 32:
-#line 110 "lex.l"
+#line 99 "lex.l"
 case 33:
-#line 111 "lex.l"
+#line 100 "lex.l"
 case 34:
 YY_RULE_SETUP
-#line 111 "lex.l"
+#line 100 "lex.l"
 { TOKWRITE(ARTH_OP, "operator", yytext); }
 	YY_BREAK
 case 35:
-#line 113 "lex.l"
+#line 102 "lex.l"
 case 36:
 YY_RULE_SETUP
-#line 113 "lex.l"
+#line 102 "lex.l"
 { TOKWRITE(UNARY_OP, "operator", yytext); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 114 "lex.l"
+#line 103 "lex.l"
 { TOKWRITE(ASGN_OP, "operator", yytext); }
 	YY_BREAK
 
@@ -1028,17 +1017,17 @@ YY_RULE_SETUP
 
 case 38:
 YY_RULE_SETUP
-#line 120 "lex.l"
+#line 109 "lex.l"
 { TOKWRITE(COMMA, "punctuation", yytext); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 121 "lex.l"
-{ TOKWRITE(SEMICOLON, "punctuation", yytext); }
+#line 110 "lex.l"
+{ ERRCHECK(0, "punctuation", yytext); TOKWRITE(SEMICOLON, "punctuation", yytext); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 122 "lex.l"
+#line 111 "lex.l"
 { TOKWRITE(ARROW, "punctuator", yytext); }
 	YY_BREAK
 
@@ -1046,33 +1035,33 @@ YY_RULE_SETUP
 
 case 41:
 YY_RULE_SETUP
-#line 128 "lex.l"
+#line 117 "lex.l"
 { TOKWRITE(L_PAREN, "special symbol", yytext); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 129 "lex.l"
-{ TOKWRITE(R_PAREN, "special symbol", yytext); }
+#line 118 "lex.l"
+{ ERRCHECK(1, "special symbol", yytext); TOKWRITE(R_PAREN, "special symbol", yytext); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 130 "lex.l"
+#line 119 "lex.l"
 { TOKWRITE(L_BRACE, "special symbol", yytext); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 131 "lex.l"
+#line 120 "lex.l"
 { TOKWRITE(R_BRACE, "special symbol", yytext); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 132 "lex.l"
+#line 121 "lex.l"
 { TOKWRITE(L_SQUARE, "special symbol", yytext); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 133 "lex.l"
-{ TOKWRITE(R_SQUARE, "special symbol", yytext); }
+#line 122 "lex.l"
+{ ERRCHECK(2, "special symbol", yytext); TOKWRITE(R_SQUARE, "special symbol", yytext); }
 	YY_BREAK
 
     /* constants */
@@ -1087,19 +1076,19 @@ YY_RULE_SETUP
 
 case 47:
 YY_RULE_SETUP
-#line 147 "lex.l"
+#line 136 "lex.l"
 { TOKWRITE(NUMBER, "constant", yytext); }
 	YY_BREAK
 case 48:
 /* rule 48 can match eol */
 YY_RULE_SETUP
-#line 148 "lex.l"
+#line 137 "lex.l"
 { fprintf(pfile, yytext); fprintf(tfile, "punctuation: \'\n"); yytext[yyleng-1] = '\0'; ++yytext; if (yytext) fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \'\n"); return CONST; }
 	YY_BREAK
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 149 "lex.l"
+#line 138 "lex.l"
 { fprintf(pfile, yytext); fprintf(tfile, "punctuation: \"\n"); yytext[yyleng-1] = '\0'; ++yytext; if (yytext) fprintf(tfile, "constant: %s\n", yytext); fprintf(tfile, "punctuation: \"\n"); return CONST; }
 	YY_BREAK
 
@@ -1107,7 +1096,7 @@ YY_RULE_SETUP
 
 case 50:
 YY_RULE_SETUP
-#line 155 "lex.l"
+#line 144 "lex.l"
 { TOKWRITE(ID, "identifier", yytext); }
 	YY_BREAK
 
@@ -1119,29 +1108,29 @@ YY_RULE_SETUP
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 164 "lex.l"
-{ ++yylineno; if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } if(yytype != -1) { fprintf(pfile, " : %s", stmt_type[yytype]); yytype = -1; } fprintf(pfile, "\n"); }
+#line 153 "lex.l"
+{ ++yylineno; if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(1); } fprintf(pfile, "\n"); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 165 "lex.l"
+#line 154 "lex.l"
 { fprintf(pfile, "%s", yytext); }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 166 "lex.l"
+#line 155 "lex.l"
 { printf("%d: Lexical error: %s\n", yylineno, yytext); return 0; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 167 "lex.l"
-{ if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } }
+#line 156 "lex.l"
+{ if (yyerrfl) { fprintf(pfile, "\ninvalid statement", yytype); exit(yyerrfl); } return TOK_EOF; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 169 "lex.l"
+#line 158 "lex.l"
 ECHO;
 	YY_BREAK
-#line 1144 "lex.yy.c"
+#line 1133 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2144,6 +2133,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 169 "lex.l"
+#line 158 "lex.l"
+
 
 

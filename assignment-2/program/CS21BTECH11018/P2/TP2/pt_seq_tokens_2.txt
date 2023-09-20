@@ -180,24 +180,24 @@ punctuation: '
 constant: y
 punctuation: '
 punctuation: ;
-special symbol: }
-special symbol: }
-reserved keyword: global
-datatype: void
-identifier: main
+reserved keyword: for
 special symbol: (
+reserved keyword: expr
+identifier: v
+operator: =
+constant: 1
+punctuation: ;
+identifier: v
+operator: lt
+constant: 4
+punctuation: ;
+operator: postdecr
+special symbol: (
+identifier: v
+special symbol: )
 special symbol: )
 special symbol: {
-reserved keyword: declare
-identifier: baz
-identifier: boom
+identifier: deaclare
+datatype: int
+identifier: x
 punctuation: ;
-reserved keyword: call
-identifier: boom
-punctuator: ->
-identifier: gazzer
-special symbol: (
-reserved keyword: false
-special symbol: )
-punctuation: ;
-special symbol: }

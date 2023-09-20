@@ -2,6 +2,42 @@ Name: Gautam Singh
 ID: CS21BTECH11018
 reserved keyword: global
 datatype: void
-operator: postincr
+identifier: poseteincr
 special symbol: (
 special symbol: )
+special symbol: {
+reserved keyword: for
+special symbol: (
+reserved keyword: expr
+identifier: v
+operator: =
+constant: 2
+punctuation: ;
+operator: add
+special symbol: (
+identifier: v
+punctuation: ,
+constant: 1
+special symbol: )
+operator: geq
+operator: add
+special symbol: (
+constant: 1
+punctuation: ,
+identifier: v
+special symbol: )
+punctuation: ;
+operator: postdecr
+special symbol: (
+identifier: v
+special symbol: )
+special symbol: )
+special symbol: {
+special symbol: }
+reserved keyword: return
+datatype: void
+punctuation: ;
+special symbol: }
+reserved keyword: return
+identifier: this_is_a_fail
+punctuation: ;

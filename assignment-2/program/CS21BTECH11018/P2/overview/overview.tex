@@ -44,12 +44,11 @@
 \def\inputGnumericTable{}                                 %%
 
 \lstset{
-%language=C,
+language=bash,
 frame=single, 
 breaklines=true,
 columns=fullflexible,
-literate=
-{-}{$\rightarrow{}$}{1},
+basicstyle=\ttfamily,
 }
 %\lstset{
 %language=tex,
@@ -106,17 +105,88 @@ literate=
      \def\midbox#1{\raisebox{-0.5\baselineskip}[0in][0in]{#1}}
 
 \vspace{3cm}
-\title{Assignment 2 : Syntax Analysis}
+\title{Overview of Syntax Analyzer}
 \author{Gautam Singh\\CS21BTECH11018}
 \maketitle
 \tableofcontents
 \bigskip
 
-This report summarizes the working of the LALR (1) syntax analyzer present in
-this directory for a C-like source language.
+This document provides a brief overview, implementation details and challenges
+in creating the given syntax analyzer, which lexes a program in a C-like 
+source language, writes the list of tokens encountered along with
+their type in one file, while also parsing statement by statement and reporting
+the types of statements parsed.
 
-\section{Installation}
+\section{Building and Usage}
 
-The syntax analyzer contains two source files, one for phrase level parsing and
+To build the syntax analyzer from the source code, enter the following commands 
+at a terminal window in the directory where the source files are present.
 
+\begin{lstlisting}
+flex lex.l
+bison -d -by parser.y
+gcc -O2 -lfl -ly lex.yy.c y.tab.c
+\end{lstlisting}
+
+This will generate an executable file \texttt{a.out}, which is the syntax
+analyzer. To run the syntax analyzer on any select testcase, enter the
+following.
+
+\begin{lstlisting}
+./a.out src.clike tokens.txt statements.parsed
+\end{lstlisting}
+
+where paths of the files are relative to the executable.
+
+\section{Implementation Details}
+The following are some important implementation details of the syntax analyzer.
+The comments in the source code provide more details.
+\begin{enumerate}
+    \item The lexical analyzer analyzes the source file token-by-token and
+    passes the information on to the syntax analyzer for statement-level
+    parsing. This is achieved using the \texttt{\%token} directive in
+    \texttt{bison}.
+    \item Both the lexical analyzer and syntax analyzer share the following
+    variables, with the \texttt{extern} modifier.
+    \begin{enumerate}
+        \item \texttt{FILE *tfile}: The filestream to write the tokens.
+        \item \texttt{FILE *pfile}: The filestream to write the parsed
+        statements along with their types.
+        \item \texttt{int yyerrfl}: A flag variable to indicate error in
+        parsing.
+        \item \texttt{int yytype}: A variable indicating the type of statement
+        parsed, based on the last character of that statement. This is to handle
+        reporting of incorrect syntax at the end of the parsed statement.
+    \end{enumerate}
+    \item It is much more convenient to handle necessary parts of the file
+    output in the lexical analysis stage (such as error diagnostics) as it
+    considers the source file token-by-token, rather than in the syntax
+    analyzer, where source code is considered phrase-by-phrase.
+    \item The syntax analyzer also handles errors that are not specific to one
+    statement. As an example, incorrectly matched braces can be reported only by
+    the syntax analyzer.
+\end{enumerate}
+
+\section{Implementation Issues}
+Some of the implementation issues and challenges faced in creating the syntax
+analyzer are listed below.
+\begin{enumerate}
+    \item The syntax analyzer did not handle missing braces and count return
+    statements, as shown in public test case 1. This was fixed by adding error
+    productions to the grammar for the start variable \texttt{program\_body}.
+    The global variable \texttt{yyretcnt} maintained a count of return
+    statements with corresponding error productions in the grammar. 
+    \item Public test case 2 tests if the grammar parses nested expressions and
+    predicates, along with their unary operators properly. Especially for
+    predicates, the grammar had to be modified to introduce right associativity
+    so that shift-reduce and reduce-reduce conflicts were avoided. Another
+    subtle detail exposed by this public test case is the handling of multiple
+    statements in the same line, as in C. Redefining \texttt{yytype} enabled
+    better error diagnostics for the \emph{correct} statement in the line, and
+    not report the error at the end of the line.
+    \item Public test case 3 checks the for loop construct, whether empty scopes
+    are allowed, and whether statements are allowed outside the scope of a
+    block. An extra production for \texttt{block\_scope} enabled the handling of
+    empty scopes.
+\end{enumerate}
 \end{document}
