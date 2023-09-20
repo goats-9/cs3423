@@ -163,6 +163,6 @@ char                                            (\\.|[^"\\])
 \n                                              { ++yylineno; if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } if(yytype != -1) { fprintf(pfile, " : %s", stmt_type[yytype]); yytype = -1; } fprintf(pfile, "\n"); }
 {ws}                                            { fprintf(pfile, "%s", yytext); }
 .                                               { printf("%d: Lexical error: %s\n", yylineno, yytext); return 0; }
-<<EOF>>                                         { if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } }
+<<EOF>>                                         { if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } if(yytype != -1) { fprintf(pfile, " : %s", stmt_type[yytype]); yytype = -1; } }
 
 %%
