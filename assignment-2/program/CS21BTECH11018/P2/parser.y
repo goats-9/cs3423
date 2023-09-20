@@ -43,6 +43,7 @@
 %token UNARY_LOGICAL_OP
 %token BINARY_LOGICAL_OP
 %token LOGICAL_JOIN_OP
+%token AND_OP OR_OP
 %token GLOBAL LOCAL
 %token CLASS
 %token DECLARE
@@ -96,6 +97,7 @@ class_definition            : CLASS ID num_args { yytype = 1; }
                             ;
 
 block_scope                 : L_BRACE blocks R_BRACE
+                            | error { fprintf(pfile, "\ninvalid statement"); return 1; }
                             ;
 
 // Argument declarations
@@ -218,14 +220,17 @@ otherwise_block             : OTHERWISE block_scope
 
 // Predicates
 
-predicate                   : predicate LOGICAL_JOIN_OP predicate
-                            | UNARY_LOGICAL_OP L_PAREN predicate R_PAREN
+predicate                   : predicate LOGICAL_JOIN_OP single_predicate
+                            | single_predicate
+                            ;
+
+single_predicate            : UNARY_LOGICAL_OP L_PAREN predicate R_PAREN
                             | L_PAREN predicate R_PAREN
                             | predicate_term
                             ;
 
 predicate_term              : unary_pred_body
-                            | unary_pred_body BINARY_LOGICAL_OP unary_pred_body
+                            | unary_pred_body BINARY_LOGICAL_OP unary_pred_body                            
                             ;
 
 unary_pred_body             : call_stmt
@@ -238,7 +243,7 @@ loop_block                  : loop_while_block
                             | loop_for_block
                             ;
 
-loop_while_block            : LOOP WHILE predicate { yytype = 6; } DO block_scope
+loop_while_block            : LOOP WHILE { yytype = 6; } predicate DO block_scope
                             ;
 
 loop_for_block              : FOR L_PAREN expr_stmt SEMICOLON predicate SEMICOLON loop_for_update R_PAREN { yytype = 6; } block_scope
@@ -254,7 +259,10 @@ int main(int argc, char *argv[]) {
     yyretcnt = 0;
     // Set input filestream
     if (argv[1]) yyin = fopen(argv[1], "r");
-    else yyin = stdin;
+    else {
+        printf("[ERROR] Cannot open source file\n");
+        return 1;
+    }
     // Set output token filestream
     if (argv[2]) tfile = fopen(argv[2], "w");
     else {

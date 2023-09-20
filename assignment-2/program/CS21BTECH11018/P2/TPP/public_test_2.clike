@@ -1,0 +1,41 @@
+global void foo[1](int x) 
+{
+    return postincr(x);
+}
+global void bar[1](int y)
+{
+    return call foo(y);
+}
+class baz[2]
+{
+    local void me[2](int x, int y)
+    {
+        expr x = add(sub(x,postincr(y)),mul(div(y,x),y));
+        return "lmao cant check types in this language LOLOLOLOL";
+    }
+    local int gazzer[1](bool fl)
+    {
+        return 42;
+        return void;
+        return "are you done with the void?";
+        return false;
+        return void;
+    }
+    in case that (neg(1 eq 1) and ((a geq b) or (c geq d) or (e leq f)))
+    do
+    {
+        declare string rolled;
+        expr rolled = 232;
+        call rick(rolled);
+    }
+    otherwise
+    {
+        declare char donothing;
+        expr donothing = 'y';
+    }
+}
+global void main ()
+{
+    declare baz boom;
+    call boom->gazzer(false);
+}

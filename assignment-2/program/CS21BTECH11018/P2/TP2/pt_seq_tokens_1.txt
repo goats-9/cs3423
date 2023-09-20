@@ -1,0 +1,55 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+reserved keyword: global
+datatype: void
+identifier: foo
+special symbol: (
+special symbol: )
+special symbol: {
+reserved keyword: declare
+datatype: int
+identifier: x
+punctuation: ;
+reserved keyword: declare
+datatype: int
+identifier: y
+punctuation: ;
+reserved keyword: expr
+identifier: x
+operator: =
+constant: 8
+punctuation: ;
+reserved keyword: declare
+datatype: int
+identifier: i
+punctuation: ;
+reserved keyword: loop
+reserved keyword: while
+special symbol: (
+identifier: i
+operator: lt
+identifier: x
+special symbol: )
+reserved keyword: do
+special symbol: {
+reserved keyword: expr
+identifier: y
+operator: =
+identifier: i
+punctuation: ;
+operator: postincr
+special symbol: (
+identifier: i
+special symbol: )
+punctuation: ;
+special symbol: }
+reserved keyword: return
+datatype: void
+punctuation: ;
+special symbol: }
+reserved keyword: class
+reserved keyword: class
+identifier: _bar
+special symbol: [
+constant: 1
+special symbol: ]

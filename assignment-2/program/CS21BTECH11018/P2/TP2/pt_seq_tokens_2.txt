@@ -1,0 +1,203 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+reserved keyword: global
+datatype: void
+identifier: foo
+special symbol: [
+constant: 1
+special symbol: ]
+special symbol: (
+datatype: int
+identifier: x
+special symbol: )
+special symbol: {
+reserved keyword: return
+operator: postincr
+special symbol: (
+identifier: x
+special symbol: )
+punctuation: ;
+special symbol: }
+reserved keyword: global
+datatype: void
+identifier: bar
+special symbol: [
+constant: 1
+special symbol: ]
+special symbol: (
+datatype: int
+identifier: y
+special symbol: )
+special symbol: {
+reserved keyword: return
+reserved keyword: call
+identifier: foo
+special symbol: (
+identifier: y
+special symbol: )
+punctuation: ;
+special symbol: }
+reserved keyword: class
+identifier: baz
+special symbol: [
+constant: 2
+special symbol: ]
+special symbol: {
+reserved keyword: local
+datatype: void
+identifier: me
+special symbol: [
+constant: 2
+special symbol: ]
+special symbol: (
+datatype: int
+identifier: x
+punctuation: ,
+datatype: int
+identifier: y
+special symbol: )
+special symbol: {
+reserved keyword: expr
+identifier: x
+operator: =
+operator: add
+special symbol: (
+operator: sub
+special symbol: (
+identifier: x
+punctuation: ,
+operator: postincr
+special symbol: (
+identifier: y
+special symbol: )
+special symbol: )
+punctuation: ,
+operator: mul
+special symbol: (
+operator: div
+special symbol: (
+identifier: y
+punctuation: ,
+identifier: x
+special symbol: )
+punctuation: ,
+identifier: y
+special symbol: )
+special symbol: )
+punctuation: ;
+reserved keyword: return
+punctuation: "
+constant: lmao cant check types in this language LOLOLOLOL
+punctuation: "
+punctuation: ;
+special symbol: }
+reserved keyword: local
+datatype: int
+identifier: gazzer
+special symbol: [
+constant: 1
+special symbol: ]
+special symbol: (
+datatype: bool
+identifier: fl
+special symbol: )
+special symbol: {
+reserved keyword: return
+constant: 42
+punctuation: ;
+reserved keyword: return
+datatype: void
+punctuation: ;
+reserved keyword: return
+punctuation: "
+constant: are you done with the void?
+punctuation: "
+punctuation: ;
+reserved keyword: return
+reserved keyword: false
+punctuation: ;
+reserved keyword: return
+datatype: void
+punctuation: ;
+special symbol: }
+reserved keyword: in case that
+special symbol: (
+operator: neg
+special symbol: (
+constant: 1
+operator: eq
+constant: 1
+special symbol: )
+operator: and
+special symbol: (
+special symbol: (
+identifier: a
+operator: geq
+identifier: b
+special symbol: )
+operator: or
+special symbol: (
+identifier: c
+operator: geq
+identifier: d
+special symbol: )
+operator: or
+special symbol: (
+identifier: e
+operator: leq
+identifier: f
+special symbol: )
+special symbol: )
+special symbol: )
+reserved keyword: do
+special symbol: {
+reserved keyword: declare
+datatype: string
+identifier: rolled
+punctuation: ;
+reserved keyword: expr
+identifier: rolled
+operator: =
+constant: 232
+punctuation: ;
+reserved keyword: call
+identifier: rick
+special symbol: (
+identifier: rolled
+special symbol: )
+punctuation: ;
+special symbol: }
+reserved keyword: otherwise
+special symbol: {
+reserved keyword: declare
+datatype: char
+identifier: donothing
+punctuation: ;
+reserved keyword: expr
+identifier: donothing
+operator: =
+punctuation: '
+constant: y
+punctuation: '
+punctuation: ;
+special symbol: }
+special symbol: }
+reserved keyword: global
+datatype: void
+identifier: main
+special symbol: (
+special symbol: )
+special symbol: {
+reserved keyword: declare
+identifier: baz
+identifier: boom
+punctuation: ;
+reserved keyword: call
+identifier: boom
+punctuator: ->
+identifier: gazzer
+special symbol: (
+reserved keyword: false
+special symbol: )
+punctuation: ;
+special symbol: }

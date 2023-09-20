@@ -1,0 +1,42 @@
+global void foo[1](int x)  : function definition
+{
+    return postincr(x); : return statement
+}
+global void bar[1](int y) : function definition
+{
+    return call foo(y); : return statement
+}
+class baz[2] : class definition
+{
+    local void me[2](int x, int y) : function definition
+    {
+        expr x = add(sub(x,postincr(y)),mul(div(y,x),y)); : expression statement
+        return "lmao cant check types in this language LOLOLOLOL"; : return statement
+    }
+    local int gazzer[1](bool fl) : function definition
+    {
+        return 42; : return statement
+        return void; : return statement
+        return "are you done with the void?"; : return statement
+        return false; : return statement
+        return void; : return statement
+    }
+    in case that (neg(1 eq 1) and ((a geq b) or (c geq d) or (e leq f))) : conditional statement
+    do
+    {
+        declare string rolled; : declaration statement
+        expr rolled = 232; : expression statement
+        call rick(rolled); : call statement
+    }
+    otherwise
+    {
+        declare char donothing; : declaration statement
+        expr donothing = 'y'; : expression statement
+    }
+}
+global void main () : function definition
+{
+    declare baz boom; : declaration statement
+    call boom->gazzer(false); : call statement with object
+}
+invalid statement

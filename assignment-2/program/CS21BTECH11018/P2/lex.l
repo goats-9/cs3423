@@ -51,7 +51,7 @@ ws                                              {delim}+
 letter                                          [a-zA-Z]
 digit                                           [0-9]
 number                                          [+\-]?{digit}+
-special                                         [@#\*\+/\\:_]
+special                                         [@#\*\+/\\:_\-]
 char                                            (\\.|[^"\\])
 
 %%
@@ -151,7 +151,7 @@ char                                            (\\.|[^"\\])
     /* identifiers */
 %}
 
-({letter}|{digit}|{special})*                   { TOKWRITE(ID, "identifier", yytext); }
+({letter}|{special})({letter}|{digit})*         { TOKWRITE(ID, "identifier", yytext); }
 
 %{
     /* whitespaces, newlines and bad characters */
@@ -163,5 +163,6 @@ char                                            (\\.|[^"\\])
 \n                                              { ++yylineno; if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } if(yytype != -1) { fprintf(pfile, " : %s", stmt_type[yytype]); yytype = -1; } fprintf(pfile, "\n"); }
 {ws}                                            { fprintf(pfile, "%s", yytext); }
 .                                               { printf("%d: Lexical error: %s\n", yylineno, yytext); return 0; }
+<<EOF>>                                         { if (yyerrfl) { fprintf(pfile, " : invalid statement"); exit(yyerrfl); } }
 
 %%

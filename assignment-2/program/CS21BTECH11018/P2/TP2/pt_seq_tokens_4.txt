@@ -1,0 +1,5 @@
+Name: Gautam Singh
+ID: CS21BTECH11018
+reserved keyword: declare
+datatype: int
+identifier: y
