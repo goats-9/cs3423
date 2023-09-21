@@ -1492,31 +1492,31 @@ yyreduce:
 
   case 37: /* stmt: $@4 stmt_body SEMICOLON  */
 #line 135 "parser.y"
-                                                                  { fprintf(pfile, " : %s statement", yytypename); }
+                                                                  { fprintf(pfile, " : %s", yytypename); }
 #line 1497 "y.tab.c"
     break;
 
   case 38: /* stmt_body: decl_stmt  */
 #line 138 "parser.y"
-                                        { yytypename = "declaration"; }
+                                        { yytypename = "declaration statement"; }
 #line 1503 "y.tab.c"
     break;
 
   case 41: /* stmt_body: return_stmt  */
 #line 141 "parser.y"
-                                          { yytypename = "return"; ++yyretcnt; }
+                                          { yytypename = "return statement"; ++yyretcnt; }
 #line 1509 "y.tab.c"
     break;
 
   case 46: /* expr_stmt: unary_expr_rhs_body  */
 #line 156 "parser.y"
-                                                  { yytypename = "call"; }
+                                                  { yytypename = "call statement"; }
 #line 1515 "y.tab.c"
     break;
 
   case 47: /* expr_stmt: EXPR ID ASGN_OP expr_term  */
 #line 157 "parser.y"
-                                                        { yytypename = "expression"; }
+                                                        { yytypename = "expression statement"; }
 #line 1521 "y.tab.c"
     break;
 
@@ -1528,7 +1528,7 @@ yyreduce:
 
   case 64: /* function_call: ID num_args L_PAREN call_params R_PAREN  */
 #line 192 "parser.y"
-                                                                      { yytypename = "call"; }
+                                                                      { yytypename = "call statement"; }
 #line 1533 "y.tab.c"
     break;
 

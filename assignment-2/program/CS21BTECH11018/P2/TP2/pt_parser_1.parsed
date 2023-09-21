@@ -34,7 +34,7 @@ class class_bar [1] : class definition
 global void main () : function definition
 {
     declare class_bar obj; : declaration statement
-    call obj->bar[10103941234]("asdasds"); : call statement with object statement
+    call obj->bar[10103941234]("asdasds"); : call statement with object
     return void; : return statement
 }
 
