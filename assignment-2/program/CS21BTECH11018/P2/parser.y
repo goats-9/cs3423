@@ -132,13 +132,13 @@ block                       : stmt
                             | class
                             ;
 
-stmt                        : { yytype = 0; } stmt_body SEMICOLON { fprintf(pfile, " : %s statement", yytypename); }
+stmt                        : { yytype = 0; } stmt_body SEMICOLON { fprintf(pfile, " : %s", yytypename); }
                             ;
 
-stmt_body                   : decl_stmt { yytypename = "declaration"; }
+stmt_body                   : decl_stmt { yytypename = "declaration statement"; }
                             | expr_stmt
                             | call_stmt
-                            | return_stmt { yytypename = "return"; ++yyretcnt; }
+                            | return_stmt { yytypename = "return statement"; ++yyretcnt; }
                             ;
 
 // Declaration statements
@@ -153,8 +153,8 @@ id_comma                    : id_comma COMMA ID
 
 // Expression statements
 
-expr_stmt                   : unary_expr_rhs_body { yytypename = "call"; }
-                            | EXPR ID ASGN_OP expr_term { yytypename = "expression"; }
+expr_stmt                   : unary_expr_rhs_body { yytypename = "call statement"; }
+                            | EXPR ID ASGN_OP expr_term { yytypename = "expression statement"; }
                             ;
 
 unary_expr_rhs_body         : UNARY_OP L_PAREN unary_expr_term R_PAREN
@@ -189,7 +189,7 @@ method_name_opt             : method_name_opt ARROW ID
                             | THIS
                             ;
 
-function_call               : ID num_args L_PAREN call_params R_PAREN { yytypename = "call"; }
+function_call               : ID num_args L_PAREN call_params R_PAREN { yytypename = "call statement"; }
                             ;
 
 call_params                 : call_params COMMA call_types
